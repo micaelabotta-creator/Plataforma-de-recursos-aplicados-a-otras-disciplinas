@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de lengua</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos.css">
+    <!-- Favicon / Ícono de la pestaña -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <<!-- BARRA DE NAVEGACIÓN -->
+  <nav class="navbar">
+    <!-- Logo o Título -->
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>AprendoLiteratura</span>
+    </div>
+
+    <!-- Botón Hamburguesa (solo visible en celular) -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
+      ☰
+    </button>
+
+    <!-- Enlaces del menú -->
+    <div class="nav-menu" id="nav-menu">
+      <a href="#">INICIO</a>
+      <a href="#seccion-contenidos">CONTENIDOS</a>
+      <a href="#seccion-ayuda">💡 AYUDA</a>
+      <a href="#" class="btn-yellow">REGÍSTRATE</a>
+      <a href="#" class="btn-blue">INICIAR SESIÓN</a>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="main-card container mt-4">
+    <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+
+    <div class="unit-header my-3">
+        <i class="fa-solid fa-book-open unit-icon"></i>
+        <div class="unit-titles">
+            <h2>Unidad 2: Clases de Palabras</h2>
+            <p>Domina los sustantivos, adjetivos, verbos, adverbios y pronombres</p>
+        </div>
+    </div>>
+
+    <!-- PESTAÑAS PRINCIPALES -->
+    <div class="tabs-bar mb-4">
+      <button class="tab-item" onclick="cambiarPestana('introduccion', this)">Introducción</button>
+      <button class="tab-item active" onclick="cambiarPestana('contenido', this)">Contenido</button>
+      <button class="tab-item" onclick="cambiarPestana('actividades', this)">Actividades</button>
+      <button class="tab-item" onclick="cambiarPestana('practica', this)">Práctica interactiva</button>
+    </div>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <div id="sec-introduccion" class="tab-content d-none">
+      <div class="card p-4">
+        <h2 class="fw-bold mb-3">¿Qué son las clases de palabras?</h2>
+        <p class="text-secondary mb-4">
+          Las palabras se clasifican según su función en la oración y su significado. Cada clase de palabra tiene un papel específico que ayuda a construir oraciones claras y correctas.
+        </p>
+
+        <div class="row g-4 justify-content-center">
+          <!-- Sustantivos -->
+          <div class="col-md-6 mb-3">
+            <div class="p-4 rounded-4 h-100 shadow-sm d-flex flex-column justify-content-between text-center" style="background-color: #f0f7ff; border: 1px solid #c0dcff;">
+              <div>
+                <span class="fs-2 mb-2 d-block">👤</span>
+                <h5 class="fw-bold text-primary mb-2">Sustantivos</h5>
+                <p class="text-secondary mb-3 small">Palabras que nombran personas, animales, cosas, lugares o ideas.</p>
+              </div>
+              <div class="p-2 rounded-3 bg-white border border-primary border-opacity-25">
+                <small class="fw-semibold text-primary d-block mb-1">Ejemplos:</small>
+                <span class="small text-muted d-block">niño, María, perro, felicidad, París, libro</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adjetivos -->
+          <div class="col-md-6 mb-3">
+            <div class="p-4 rounded-4 h-100 shadow-sm d-flex flex-column justify-content-between text-center" style="background-color: #f0fdf4; border: 1px solid #bbf7d0;">
+              <div>
+                <span class="fs-2 mb-2 d-block">🎨</span>
+                <h5 class="fw-bold text-success mb-2">Adjetivos</h5>
+                <p class="text-secondary mb-3 small">Palabras que califican o determinan al sustantivo, indicando cualidades o características.</p>
+              </div>
+              <div class="p-2 rounded-3 bg-white border border-success border-opacity-25">
+                <small class="fw-semibold text-success d-block mb-1">Ejemplos:</small>
+                <span class="small text-muted d-block">bonito, grande, este, mi, primer, algunos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Verbos -->
+          <div class="col-md-6 mb-3">
+            <div class="p-4 rounded-4 h-100 shadow-sm d-flex flex-column justify-content-between text-center" style="background-color: #faf5ff; border: 1px solid #e9d5ff;">
+              <div>
+                <span class="fs-2 mb-2 d-block">⚡</span>
+                <h5 class="fw-bold mb-2" style="color: #8b5cf6;">Verbos</h5>
+                <p class="text-secondary mb-3 small">Palabras que expresan acciones, estados o procesos.</p>
+              </div>
+              <div class="p-2 rounded-3 bg-white border border-opacity-25" style="border-color: #c084fc !important;">
+                <small class="fw-semibold d-block mb-1" style="color: #8b5cf6;">Ejemplos:</small>
+                <span class="small text-muted d-block">correr, pensar, es, tiene, saltar, estudiar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adverbios -->
+          <div class="col-md-6 mb-3">
+            <div class="p-4 rounded-4 h-100 shadow-sm d-flex flex-column justify-content-between text-center" style="background-color: #fffbeb; border: 1px solid #fde68a;">
+              <div>
+                <span class="fs-2 mb-2 d-block">🎯</span>
+                <h5 class="fw-bold mb-2" style="color: #d97706;">Adverbios</h5>
+                <p class="text-secondary mb-3 small">Palabras que modifican al verbo, adjetivo u otro adverbio, indicando modo, lugar, tiempo, etc.</p>
+              </div>
+              <div class="p-2 rounded-3 bg-white border border-warning border-opacity-25">
+                <small class="fw-semibold d-block mb-1" style="color: #d97706;">Ejemplos:</small>
+                <span class="small text-muted d-block">rápidamente, aquí, hoy, mucho, sí, no</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pronombres -->
+          <div class="col-md-6 mb-3">
+            <div class="p-4 rounded-4 h-100 shadow-sm d-flex flex-column justify-content-between text-center" style="background-color: #fff7ed; border: 1px solid #ffedd5;">
+              <div>
+                <span class="fs-2 mb-2 d-block">📍</span>
+                <h5 class="fw-bold mb-2" style="color: #ea580c;">Pronombres</h5>
+                <p class="text-secondary mb-3 small">Palabras que sustituyen al nombre para evitar repeticiones.</p>
+              </div>
+              <div class="p-2 rounded-3 bg-white border border-opacity-25" style="border-color: #fdba74 !important;">
+                <small class="fw-semibold d-block mb-1" style="color: #ea580c;">Ejemplos:</small>
+                <span class="small text-muted d-block">yo, tú, él, este, mío, alguien, que</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: CONTENIDO -->
+    <div id="sec-contenido" class="tab-content">
+      
+      <!-- Selector de Clases de Palabras -->
+      <div class="card mb-4 p-4 shadow-sm border-0 rounded-4">
+        <h4 class="fw-bold mb-3" style="color: #0f172a; font-size: 18px;">Selecciona una clase de palabra</h4>
+        
+        <div class="row g-2 justify-content-center">
+          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn active" data-topic="sustantivos" onclick="cargarTema('sustantivos')">Sustantivos</button></div>
+          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="adjetivos" onclick="cargarTema('adjetivos')">Adjetivos</button></div>
+          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="verbos" onclick="cargarTema('verbos')">Verbos</button></div>
+          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="adverbios" onclick="cargarTema('adverbios')">Adverbios</button></div>
+          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="pronombres" onclick="cargarTema('pronombres')">Pronombres</button></div>
+        </div>
+      </div>
+
+      <!-- Detalle del Tema Seleccionado (Se llena dinámicamente con JS) -->
+      <div class="card p-4 shadow-sm border-0 rounded-4" id="contenedor-detalle-tema">
+        <!-- JS inyectará la tarjeta aquí -->
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN 3: ACTIVIDADES -->
+   <!-- SECCIÓN 3: ACTIVIDADES -->
+<div id="sec-actividades" class="tab-content d-none">
+  <div class="card p-4 shadow-sm border-0 rounded-4">
+    
+    <h3 class="fw-bold mb-4" style="color: #0f172a; font-size: 20px;">Actividades de Identificación</h3>
+
+    <form id="form-actividades-u2">
+      
+      <!-- Pregunta 1 -->
+      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q1-card">
+        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+          1. Identifica el <strong>SUSTANTIVO</strong> en la siguiente oración: "El gato negro duerme en el sofá cómodo."
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="negro"> <span>negro</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="gato"> <span>gato</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="duerme"> <span>duerme</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="cómodo"> <span>cómodo</span></label></div>
+        </div>
+        <div class="feedback-msg mt-2" id="feedback-q1"></div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q2-card">
+        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+          2. ¿Cuál es el <strong>ADJETIVO</strong> en: "Mi hermana pequeña juega en el parque grande"?
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="hermana"> <span>hermana</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="pequeña"> <span>pequeña</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="juega"> <span>juega</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="parque"> <span>parque</span></label></div>
+        </div>
+        <div class="feedback-msg mt-2" id="feedback-q2"></div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q3-card">
+        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+          3. Encuentra el <strong>VERBO</strong>: "Los estudiantes escriben sus tareas rápidamente."
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="estudiantes"> <span>estudiantes</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="escriben"> <span>escriben</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="tareas"> <span>tareas</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="rápidamente"> <span>rápidamente</span></label></div>
+        </div>
+        <div class="feedback-msg mt-2" id="feedback-q3"></div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q4-card">
+        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+          4. Identifica el <strong>ADVERBIO</strong>: "María corre muy rápido en las mañanas."
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="María"> <span>María</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="corre"> <span>corre</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="rápido"> <span>rápido</span></label></div>
+          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="mañanas"> <span>mañanas</span></label></div>
+        </div>
+        <div class="feedback-msg mt-2" id="feedback-q4"></div>
+      </div>
+
+      <!-- Botón Verificar Respuestas -->
+      <button type="button" class="btn btn-verificar w-100 py-3 fw-bold rounded-3" onclick="verificarRespuestasU2()">
+        Verificar Respuestas
+      </button>
+
+    </form>
+
+    <div id="resultado-actividades" class="mt-3 p-3 rounded-3 text-center fw-bold d-none"></div>
+
+  </div>
+</div>
+
+  <!-- SECCIÓN 4: PRÁCTICA INTERACTIVA -->
+<div id="sec-practica" class="tab-content d-none">
+  <div class="card p-4 shadow-sm border-0 rounded-4">
+    
+    <h3 class="fw-bold mb-1" style="color: #0f172a; font-size: 20px;">Práctica Interactiva: Clasificación de Palabras</h3>
+    <p class="text-secondary mb-3 small">Arrastra cada palabra a su categoría correspondiente</p>
+
+    <!-- REFERENCIA VISUAL CON TILDE VERDE Y CRUZ ROJA -->
+    <div class="d-flex align-items-center gap-3 mb-3 p-2 rounded-3 bg-light border">
+      <small class="fw-semibold text-secondary">Referencia:</small>
+      <span class="badge-ref ref-correcto">
+        <i class="fw-bold text-success">✓</i> Correcto
+      </span>
+      <span class="badge-ref ref-incorrecto">
+        <i class="fw-bold text-danger">✗</i> Incorrecto
+      </span>
+    </div>
+
+    <!-- Caja de Palabras Disponibles -->
+    <div class="p-3 mb-4 rounded-3" style="background-color: #f8fafc; border: 1px dashed #cbd5e1;">
+      <small class="fw-semibold text-secondary d-block mb-3">Palabras disponibles:</small>
+      <div class="d-flex flex-wrap gap-2 align-items-center" id="palabras-disponibles" ondragover="permitirSoltar(event)" ondrop="soltar(event)">
+        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-montana" data-categoria="Sustantivo">montaña</span>
+        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-brillante" data-categoria="Adjetivo">brillante</span>
+        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-correr" data-categoria="Verbo">correr</span>
+        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-lentamente" data-categoria="Adverbio">lentamente</span>
+        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-ella" data-categoria="Pronombre">ella</span>
+      </div>
+    </div>
+
+    <!-- Contenedor de Cajas Destino -->
+    <div class="row g-3 mb-4">
+      
+      <!-- Sustantivo -->
+      <div class="col-md-4">
+        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Sustantivo">
+          <strong class="d-block mb-2 text-dark small">Sustantivo</strong>
+          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Adjetivo -->
+      <div class="col-md-4">
+        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adjetivo">
+          <strong class="d-block mb-2 text-dark small">Adjetivo</strong>
+          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Verbo -->
+      <div class="col-md-4">
+        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Verbo">
+          <strong class="d-block mb-2 text-dark small">Verbo</strong>
+          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Adverbio -->
+      <div class="col-md-4 mt-3">
+        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adverbio">
+          <strong class="d-block mb-2 text-dark small">Adverbio</strong>
+          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Pronombre -->
+      <div class="col-md-4 mt-3">
+        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Pronombre">
+          <strong class="d-block mb-2 text-dark small">Pronombre</strong>
+          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Botón Reiniciar -->
+    <div>
+      <button type="button" class="btn btn-dark btn-reiniciar px-4 py-2 fw-semibold rounded-3" onclick="reiniciarActividadInteractiva()">
+        Reiniciar Actividad
+      </button>
+    </div>
+
+  </div>
+</div>
+
+  </div> <!-- Cierre main-card -->
+
+  <!-- SCRIPT CON TODA LA LÓGICA DE DATO Y NAVEGACIÓN -->
+  <script>
+    // 1. Datos para las Clases de Palabras
+    const temasClasesPalabras = {
+      sustantivos: {
+        titulo: "Sustantivos",
+        descripcion: "Palabras que nombran personas, animales, cosas, lugares o ideas.",
+        clasificaciones: [
+          { tipo: "Propios", desc: "Nombran en particular (Juan, México, Amazon)" },
+          { tipo: "Comunes", desc: "Nombran en general (niño, país, empresa)" },
+          { tipo: "Concretos", desc: "Se pueden percibir por los sentidos (mesa, perro)" },
+          { tipo: "Abstractos", desc: "No se pueden percibir por los sentidos (amor, felicidad)" },
+          { tipo: "Individuales", desc: "Nombran a un solo ser (árbol, oveja)" },
+          { tipo: "Colectivos", desc: "Nombran a un conjunto (bosque, rebaño)" }
+        ],
+        ejemplos: "niño, María, perro, felicidad, París, libro"
+      },
+      adjetivos: {
+        titulo: "Adjetivos",
+        descripcion: "Palabras que califican o determinan al sustantivo, indicando cualidades o características.",
+        clasificaciones: [
+          { tipo: "Calificativos", desc: "Expresan cualidades o estados (alto, grande, bonito)" },
+          { tipo: "Demostrativos", desc: "Indican la distancia espacial/temporal (este, ese, aquel)" },
+          { tipo: "Posesivos", desc: "Denotan pertenencia o posesión (mi, tu, su, nuestro)" },
+          { tipo: "Numerales", desc: "Indican cantidad u orden preciso (dos, primer, doble)" }
+        ],
+        ejemplos: "bonito, grande, este, mi, primer, algunos"
+      },
+      verbos: {
+        titulo: "Verbos",
+        descripcion: "Palabras que expresan acciones, estados o procesos.",
+        clasificaciones: [
+          { tipo: "Acción", desc: "Describen actividades físicas o mentales (correr, pensar)" },
+          { tipo: "Estado", desc: "Expresan situaciones o condiciones (ser, estar, parecer)" },
+          { tipo: "Proceso", desc: "Indican transformaciones o cambios (crecer, envejecer)" }
+        ],
+        ejemplos: "correr, pensar, es, tiene, saltar, estudiar"
+      },
+      adverbios: {
+        titulo: "Adverbios",
+        descripcion: "Palabras que modifican al verbo, adjetivo u otro adverbio.",
+        clasificaciones: [
+          { tipo: "Lugar", desc: "Indican ubicación (aquí, allí, lejos, cerca)" },
+          { tipo: "Tiempo", desc: "Muestran cuándo ocurre la acción (hoy, mañana, tarde)" },
+          { tipo: "Modo", desc: "Manera en que ocurre la acción (rápidamente, bien, mal)" },
+          { tipo: "Cantidad", desc: "Indican grado o escala (mucho, poco, muy)" }
+        ],
+        ejemplos: "rápidamente, aquí, hoy, mucho, sí, no"
+      },
+      pronombres: {
+        titulo: "Pronombres",
+        descripcion: "Palabras que sustituyen al nombre para evitar repeticiones.",
+        clasificaciones: [
+          { tipo: "Personales", desc: "Sustituyen a las personas gramaticales (yo, tú, él, nosotros)" },
+          { tipo: "Demostrativos", desc: "Señalan seres según la distancia (este, ese, aquel)" },
+          { tipo: "Posesivos", desc: "Indican posesión (mío, tuyo, suyo)" }
+        ],
+        ejemplos: "yo, tú, él, este, mío, alguien, que"
+      }
+    };
+
+    // 2. Función para cambiar entre pestañas principales
+    function cambiarPestana(pestanaNombre, boton) {
+      // Ocultar todas las pestañas
+      document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('d-none'));
+      
+      // Desmarcar botones superiores
+      document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
+
+      // Mostrar la pestaña seleccionada
+      const seccion = document.getElementById('sec-' + pestanaNombre);
+      if (seccion) {
+        seccion.classList.remove('d-none');
+      }
+
+      // Activar botón superior presionado
+      if (boton) {
+        boton.classList.add('active');
+      }
+
+      // Si se abre 'contenido', renderizar Sustantivos por defecto
+      if (pestanaNombre === 'contenido') {
+        cargarTema('sustantivos');
+      }
+    }
+
+    // 3. Función para dibujar los detalles según el botón seleccionado
+    function cargarTema(temaKey) {
+      // Activar visualmente el botón seleccionado
+      document.querySelectorAll('.topic-btn').forEach(btn => {
+        if (btn.getAttribute('data-topic') === temaKey) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const data = temasClasesPalabras[temaKey];
+      if (!data) return;
+
+      // Crear las cajas de clasificaciones
+      let itemsHTML = '';
+      data.clasificaciones.forEach(item => {
+        itemsHTML += `
+          <div class="col-md-6 mb-3">
+            <div class="p-3 rounded-3 bg-light d-flex align-items-center gap-2">
+              <span class="text-success fs-5 fw-bold">☑</span>
+              <span class="small"><strong>${item.tipo}:</strong> ${item.desc}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      // Insertar el contenido en el contenedor
+      const contenedor = document.getElementById('contenedor-detalle-tema');
+      contenedor.innerHTML = `
+        <h3 class="fw-bold mb-1">${data.titulo}</h3>
+        <p class="text-muted mb-4">${data.descripcion}</p>
+
+        <h6 class="fw-bold mb-3">Tipos y clasificaciones:</h6>
+        <div class="row g-3 mb-2">
+          ${itemsHTML}
+        </div>
+
+        <h6 class="fw-bold mb-2">Ejemplos:</h6>
+        <div class="p-3 rounded-3" style="background-color: #eff6ff; border-left: 4px solid #2563eb;">
+          <p class="mb-0 text-dark font-monospace">${data.ejemplos}</p>
+        </div>
+      `;
+    }
+
+    // Cargar automáticamente Sustantivos al entrar a la página
+    document.addEventListener('DOMContentLoaded', () => {
+      cargarTema('sustantivos');
+    });
+  </script>
+
+  <!--respuestas correctas de la seccion actividades de unidad 2-->
+  <script>
+    function verificarRespuestasU2() {
+  // Respuestas correctas
+  const respuestasCorrectas = {
+    q1: "gato",
+    q2: "pequeña",
+    q3: "escriben",
+    q4: "rápido"
+  };
+
+  let puntaje = 0;
+  const total = 4;
+
+  for (let key in respuestasCorrectas) {
+    // 1. Buscamos la opción seleccionada correctamente en el DOM
+    const opcionSeleccionada = document.querySelector(`input[name="${key}"]:checked`);
+    const card = document.getElementById(`${key}-card`);
+    const feedback = document.getElementById(`feedback-${key}`);
+
+    // Limpiamos estilos previos si existieran
+    if (card) card.classList.remove('card-correcta', 'card-incorrecta');
+    if (feedback) {
+      feedback.innerText = '';
+      feedback.className = 'feedback-msg mt-2';
+    }
+
+    // 2. Si no seleccionó nada
+    if (!opcionSeleccionada) {
+      if (card) card.classList.add('card-incorrecta');
+      if (feedback) {
+        feedback.innerText = '⚠️ Por favor, selecciona una opción.';
+        feedback.classList.add('msg-incorrecto');
+      }
+      continue;
+    }
+
+    // 3. Comparamos la respuesta
+    const valorRespuesta = opcionSeleccionada.value;
+
+    if (valorRespuesta === respuestasCorrectas[key]) {
+      puntaje++;
+      if (card) card.classList.add('card-correcta');
+      if (feedback) {
+        feedback.innerText = '¡Correcto! 🎉';
+        feedback.classList.add('msg-correcto');
+      }
+    } else {
+      if (card) card.classList.add('card-incorrecta');
+      if (feedback) {
+        feedback.innerText = `Incorrecto. La respuesta correcta es "${respuestasCorrectas[key]}".`;
+        feedback.classList.add('msg-incorrecto');
+      }
+    }
+  }
+
+  // 4. Mostrar cartel resumen al final
+  const resumen = document.getElementById('resultado-actividades');
+  if (resumen) {
+    resumen.classList.remove('d-none', 'alert-success', 'alert-danger', 'alert-warning');
+    
+    if (puntaje === total) {
+      resumen.classList.add('alert', 'alert-success');
+      resumen.innerText = `¡Excelente! Respondiste correctamente ${puntaje} de ${total} preguntas.`;
+    } else {
+      resumen.classList.add('alert', 'alert-warning');
+      resumen.innerText = `Obtuviste ${puntaje} de ${total} respuestas correctas. ¡Revisa los marcados en rojo e inténtalo de nuevo!`;
+    }
+  }
+}
+  </script>
+  <!--practica interactiva-->
+  <script>
+    // Funciones para la API Nativa Drag and Drop
+function arrastrar(ev) {
+  ev.dataTransfer.setData("text/plain", ev.target.id);
+}
+
+function permitirSoltar(ev) {
+  ev.preventDefault();
+  // Añadir visualmente un resalte a la caja
+  const caja = ev.target.closest('.caja-drop');
+  if (caja) caja.classList.add('drag-hover');
+}
+
+function soltar(ev) {
+  ev.preventDefault();
+  
+  // Quitar resalte de la caja
+  document.querySelectorAll('.caja-drop').forEach(c => c.classList.remove('drag-hover'));
+
+  const idPalabra = ev.dataTransfer.getData("text/plain");
+  const elementoPalabra = document.getElementById(idPalabra);
+  
+  if (!elementoPalabra) return;
+
+  // Detectar si se soltó sobre una caja de categoría o sobre el contenedor original
+  const cajaDrop = ev.target.closest('.caja-drop');
+  const contenedorDisponibles = ev.target.closest('#palabras-disponibles');
+
+  if (cajaDrop) {
+    const dropZone = cajaDrop.querySelector('.drop-zone') || cajaDrop;
+    dropZone.appendChild(elementoPalabra);
+
+    // Validar si la categoría de la caja coincide con la palabra
+    const catCaja = cajaDrop.getAttribute('data-categoria');
+    const catPalabra = elementoPalabra.getAttribute('data-categoria');
+
+    if (catCaja === catPalabra) {
+      elementoPalabra.classList.remove('chip-incorrecto');
+      elementoPalabra.classList.add('chip-correcto');
+    } else {
+      elementoPalabra.classList.remove('chip-correcto');
+      elementoPalabra.classList.add('chip-incorrecto');
+    }
+
+  } else if (contenedorDisponibles) {
+    // Si se devuelve a la caja original
+    contenedorDisponibles.appendChild(elementoPalabra);
+    elementoPalabra.classList.remove('chip-correcto', 'chip-incorrecto');
+  }
+}
+
+// Función para el botón "Reiniciar Actividad"
+function reiniciarActividadInteractiva() {
+  const contenedorOrigen = document.getElementById('palabras-disponibles');
+  const palabras = document.querySelectorAll('.palabra-chip');
+
+  palabras.forEach(palabra => {
+    palabra.classList.remove('chip-correcto', 'chip-incorrecto');
+    contenedorOrigen.appendChild(palabra);
+  });
+
+  document.querySelectorAll('.caja-drop').forEach(c => c.classList.remove('drag-hover'));
+}
+  </script>
+
+  <!--abrir y cerrar el menu-->
+<script>
+  
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    // Abre/cierra el menú al tocar el botón ☰
+    hamburgerBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Cierra el menú al hacer clic en cualquier opción
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+

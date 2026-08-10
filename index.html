@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de lengua</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome para los íconos del menú (llave y usuario) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="estilos.css">
+    <!-- Favicon / Ícono de la pestaña -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+  <!-- NAVBAR -->
+  <body>
+
+<!-- BARRA DE NAVEGACIÓN -->
+<nav class="navbar">
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>AprendoLiteratura</span>
+  </div>
+
+  <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
+    ☰
+  </button>
+
+  <div class="nav-menu" id="nav-menu">
+    <a href="#">INICIO</a>
+    <a href="#seccion-contenidos">CONTENIDOS</a>
+    <a href="#seccion-ayuda">💡 AYUDA</a>
+    
+    <!-- BOTONES ESTÁNDAR (Visibles si no inició sesión) -->
+    <div id="auth-buttons" class="d-inline-flex gap-2">
+     <!-- Con margen CSS directo en el primer botón -->
+       <a href="#" class="btn btn-warning text-white fw-semibold px-3 rounded-pill" style="margin-right: 10px;" data-bs-toggle="modal" data-bs-target="#authModal" onclick="abrirAuthModal('registro')">
+  🔑 REGÍSTRATE
+</a>
+
+      <a href="#" class="btn btn-info text-white fw-semibold px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#authModal" onclick="abrirAuthModal('login')">
+  👨‍🎓 INICIAR SESIÓN
+</a>
+    </div>
+
+    <!-- CONTENEDOR DE PERFIL (Se muestra al iniciar sesión) -->
+    <div id="user-profile-menu" class="d-none align-items-center gap-2">
+      <img id="nav-user-photo" src="https://via.placeholder.com/40" alt="Foto de perfil" class="rounded-circle border" style="width: 40px; height: 40px; object-fit: cover;">
+      <span id="nav-user-name" class="fw-bold text-dark">Usuario</span>
+      <button onclick="cerrarSesion()" class="btn btn-outline-danger btn-sm rounded-pill ms-2">Cerrar Sesión</button>
+    </div>
+  </div>
+</nav>
+
+<!-- VENTANA MODAL UNIFICADA (REGISTRO Y LOGIN) -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-dark" id="modalTitulo">Autenticación</h5>
+        <button type="button" class="btn-close" id="btn-close-modal" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        
+        <!-- PASO 1: SELECCIÓN DE ROL (Solo para Registro) -->
+        <div id="step-role-selection">
+          <p class="text-secondary text-center mb-4">¿Cómo querés registrarte?</p>
+          <div class="d-grid gap-3">
+            <button class="btn btn-outline-primary btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Estudiante')">
+              👨‍🎓 Soy Estudiante
+            </button>
+            <button class="btn btn-outline-success btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Docente')">
+              👩‍🏫 Soy Docente
+            </button>
+          </div>
+        </div>
+
+        <!-- PASO 2: FORMULARIO DE REGISTRO -->
+        <form id="form-registro" class="d-none" onsubmit="guardarRegistro(event)">
+          <div class="alert alert-info text-center py-2" id="badge-rol">Rol seleccionado: Estudiante</div>
+          
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Foto de Perfil</label>
+            <input type="file" id="reg-foto" class="form-control" accept="image/*">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nombre Completo</label>
+            <input type="text" id="reg-nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success fw-semibold">Completar Registro</button>
+            <button type="button" class="btn btn-link text-secondary text-decoration-none" onclick="abrirAuthModal('registro')">← Volver a elegir rol</button>
+          </div>
+        </form>
+
+        <!-- PASO 3: FORMULARIO DE INICIO DE SESIÓN -->
+        <form id="form-login" class="d-none" onsubmit="procesarLogin(event)">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <input type="email" id="login-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-info text-white fw-semibold">Iniciar Sesión</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS DE BOOTSTRAP Y LÓGICA DE REGISTRO/LOGIN CON IMAGEN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let rolSeleccionado = '';
+
+  // Verificar si hay una sesión activa al cargar la página
+  window.addEventListener('DOMContentLoaded', () => {
+    const usuarioActivo = JSON.parse(localStorage.getItem('sesion_activa'));
+    if (usuarioActivo) {
+      renderizarPerfilNavbar(usuarioActivo);
+    }
+  });
+
+  function abrirAuthModal(modo) {
+    const titulo = document.getElementById('modalTitulo');
+    const stepRole = document.getElementById('step-role-selection');
+    const formRegistro = document.getElementById('form-registro');
+    const formLogin = document.getElementById('form-login');
+
+    if (modo === 'registro') {
+      titulo.innerText = "Crear Cuenta Nueva";
+      stepRole.classList.remove('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.add('d-none');
+    } else {
+      titulo.innerText = "Iniciar Sesión";
+      stepRole.classList.add('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.remove('d-none');
+    }
+  }
+
+  function mostrarFormularioRegistro(rol) {
+    rolSeleccionado = rol;
+    document.getElementById('modalTitulo').innerText = `Registro de ${rol}`;
+    document.getElementById('badge-rol').innerText = `Perfil seleccionado: ${rol}`;
+    document.getElementById('step-role-selection').classList.add('d-none');
+    document.getElementById('form-registro').classList.remove('d-none');
+  }
+
+  function guardarRegistro(event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById('reg-foto');
+    const file = fileInput.files[0];
+
+    // Foto por defecto si el usuario no sube ninguna
+    let fotoBase64 = "https://ui-avatars.com/api/?name=" + encodeURIComponent(document.getElementById('reg-nombre').value);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        fotoBase64 = e.target.result;
+        completarGuardado(fotoBase64);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      completarGuardado(fotoBase64);
+    }
+  }
+
+  function completarGuardado(fotoUrl) {
+    const usuario = {
+      nombre: document.getElementById('reg-nombre').value,
+      email: document.getElementById('reg-email').value,
+      password: document.getElementById('reg-password').value,
+      rol: rolSeleccionado,
+      foto: fotoUrl
+    };
+
+    localStorage.setItem(usuario.email, JSON.stringify(usuario));
+    alert(`¡Cuenta de ${usuario.rol} creada con éxito! Ahora podés iniciar sesión.`);
+
+    document.getElementById('form-registro').reset();
+    abrirAuthModal('login');
+  }
+
+  function procesarLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const usuarioGuardado = localStorage.getItem(email);
+
+    if (!usuarioGuardado) {
+      alert("El correo ingresado no está registrado.");
+      return;
+    }
+
+    const usuario = JSON.parse(usuarioGuardado);
+
+    if (usuario.password === password) {
+      // Guardar sesión activa
+      localStorage.setItem('sesion_activa', JSON.stringify(usuario));
+      
+      // Actualizar Navbar
+      renderizarPerfilNavbar(usuario);
+
+      // Resetear formulario
+      document.getElementById('form-login').reset();
+
+      // CIERRE GARANTIZADO DE LA MODAL
+      const btnCerrar = document.getElementById('btn-close-modal');
+      if (btnCerrar) {
+        btnCerrar.click(); // Hace un clic en la X de la ventana para cerrarla por la vía nativa de Bootstrap
+      } else {
+        // Cierre alternativo en caso de emergencia
+        const modalElement = document.getElementById('authModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) modalInstance.hide();
+      }
+
+    } else {
+      alert("Contraseña incorrecta. Intentalo de nuevo.");
+    }
+  }
+
+  function renderizarPerfilNavbar(usuario) {
+    document.getElementById('auth-buttons').classList.add('d-none');
+    
+    const profileMenu = document.getElementById('user-profile-menu');
+    profileMenu.classList.remove('d-none');
+    profileMenu.classList.add('d-flex');
+
+    document.getElementById('nav-user-photo').src = usuario.foto;
+    document.getElementById('nav-user-name').innerText = usuario.nombre;
+  }
+
+  function cerrarSesion() {
+    localStorage.removeItem('sesion_activa');
+    document.getElementById('user-profile-menu').classList.add('d-none');
+    document.getElementById('user-profile-menu').classList.remove('d-flex');
+    document.getElementById('auth-buttons').classList.remove('d-none');
+  }
+
+  function reiniciarModal() {
+    abrirAuthModal('login');
+  }
+</script>
+
+<!-- VENTANA MODAL UNIFICADA (REGISTRO Y LOGIN) -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-dark" id="modalTitulo">Autenticación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        
+        <!-- PASO 1: SELECCIÓN DE ROL (Solo para Registro) -->
+        <div id="step-role-selection">
+          <p class="text-secondary text-center mb-4">¿Cómo querés registrarte?</p>
+          <div class="d-grid gap-3">
+            <button class="btn btn-outline-primary btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Estudiante')">
+              👨‍🎓 Soy Estudiante
+            </button>
+            <button class="btn btn-outline-success btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Docente')">
+              👩‍🏫 Soy Docente
+            </button>
+          </div>
+        </div>
+
+        <!-- PASO 2: FORMULARIO DE REGISTRO -->
+        <form id="form-registro" class="d-none" onsubmit="guardarRegistro(event)">
+          <div class="alert alert-info text-center py-2" id="badge-rol">Rol seleccionado: Estudiante</div>
+          
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nombre Completo</label>
+            <input type="text" id="reg-nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-success fw-semibold">Completar Registro</button>
+            <button type="button" class="btn btn-link text-secondary text-decoration-none" onclick="abrirAuthModal('registro')">← Volver a elegir rol</button>
+          </div>
+        </form>
+
+        <!-- PASO 3: FORMULARIO DE INICIO DE SESIÓN -->
+        <form id="form-login" class="d-none" onsubmit="procesarLogin(event)">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Correo Electrónico</label>
+            <input type="email" id="login-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Contraseña</label>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-info text-white fw-semibold">Iniciar Sesión</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPTS DE BOOTSTRAP Y LÓGICA DE REGISTRO/LOGIN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let rolSeleccionado = '';
+
+  // Controla qué vista mostrar dentro de la modal
+  function abrirAuthModal(modo) {
+    const titulo = document.getElementById('modalTitulo');
+    const stepRole = document.getElementById('step-role-selection');
+    const formRegistro = document.getElementById('form-registro');
+    const formLogin = document.getElementById('form-login');
+
+    if (modo === 'registro') {
+      titulo.innerText = "Crear Cuenta Nueva";
+      stepRole.classList.remove('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.add('d-none');
+    } else {
+      titulo.innerText = "Iniciar Sesión";
+      stepRole.classList.add('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.remove('d-none');
+    }
+  }
+
+  // Pasa del paso de selección de rol al formulario de registro
+  function mostrarFormularioRegistro(rol) {
+    rolSeleccionado = rol;
+    document.getElementById('modalTitulo').innerText = `Registro de ${rol}`;
+    document.getElementById('badge-rol').innerText = `Perfil seleccionado: ${rol}`;
+    document.getElementById('step-role-selection').classList.add('d-none');
+    document.getElementById('form-registro').classList.remove('d-none');
+  }
+
+  // Guardar datos en el almacenamiento local del navegador (localStorage)
+  function guardarRegistro(event) {
+    event.preventDefault();
+
+    const usuario = {
+      nombre: document.getElementById('reg-nombre').value,
+      email: document.getElementById('reg-email').value,
+      password: document.getElementById('reg-password').value,
+      rol: rolSeleccionado
+    };
+
+    // Guardar usuario en localStorage usando el email como clave
+    localStorage.setItem(usuario.email, JSON.stringify(usuario));
+
+    alert(`¡Cuenta de ${usuario.rol} creada con éxito! Ahora podés iniciar sesión.`);
+    
+    // Resetear formulario y alternar a vista de Login
+    document.getElementById('form-registro').reset();
+    abrirAuthModal('login');
+  }
+
+  // Validar credenciales al iniciar sesión
+  function procesarLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const usuarioGuardado = localStorage.getItem(email);
+
+    if (!usuarioGuardado) {
+      alert("El correo ingresado no está registrado.");
+      return;
+    }
+
+    const usuario = JSON.parse(usuarioGuardado);
+
+    if (usuario.password === password) {
+      alert(`¡Bienvenido/a de nuevo ${usuario.nombre}! Has ingresado como [${usuario.rol}].`);
+      
+      // Cerrar la modal
+      const modalElement = document.getElementById('authModal');
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (modalInstance) modalInstance.hide();
+
+      document.getElementById('form-login').reset();
+    } else {
+      alert("Contraseña incorrecta. Intentalo de nuevo.");
+    }
+  }
+
+  // Función requerida para mantener compatibilidad con tu navbar
+  function reiniciarModal() {
+    abrirAuthModal('login');
+  }
+</script>
+
+<!-- SCRIPTS OBLIGATORIOS (Ponelos al final antes de cerrar el </body>) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let modoActual = 'login';
+
+  function reiniciarModal(modo) {
+    modoActual = modo;
+    const titulo = document.getElementById('modalTitulo');
+    const bajada = document.getElementById('modalBajada');
+
+    if (modo === 'registro') {
+      titulo.innerText = "Crear una cuenta nueva";
+      bajada.innerText = "Elegí tu rol para registrarte:";
+    } else {
+      titulo.innerText = "Iniciar Sesión";
+      bajada.innerText = "Elegí tu rol para ingresar:";
+    }
+  }
+
+  function seleccionarRol(rol) {
+    alert(`Accediendo en modo [${modoActual.toUpperCase()}] como: ${rol}`);
+    
+    // Cierra la modal automáticamente tras elegir
+    const modalElement = document.getElementById('roleModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+  }
+</script>
+  <!-- Resto de tu página (Hero section, unidades, etc.) -->
+
+<!-- BANNER PRINCIPAL (HERO SECTION) -->
+<section class="hero-banner">
+  <div class="hero-container">
+    
+    <!-- Lado Izquierdo: Mensaje + Llamados a la Acción -->
+    <div class="hero-content">
+      <span class="badge-tag">🚀 Plataforma Educativa Interactiva</span>
+      <h1>Aprende Lengua de forma divertida y digital</h1>
+      <p>
+        Descubre tutoriales guiados, resuelve actividades interactivas, pon a prueba tus conocimientos con evaluaciones rápidas y suma puntos mientras aprendes.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="#unidades" class="btn-hero btn-primary-hero">
+          🎯 Comenzar a Aprender
+        </a>
+        <a href="tutorial.html" class="btn-hero btn-secondary-hero">
+          💡 Ver Tutorial de Uso
+        </a>
+      </div>
+    </div>
+
+    <!-- Lado Derecho: Pilares de Gamificación y Herramientas -->
+    <div class="hero-features">
+      <div class="feature-card f-blue">
+        <span class="f-icon">📝</span>
+        <div>
+          <h4>Actividades Interactivas</h4>
+          <p>Ejercicios dinámicos paso a paso</p>
+        </div>
+      </div>
+
+      <div class="feature-card f-purple">
+        <span class="f-icon">📊</span>
+        <div>
+          <h4>Evaluación Continua</h4>
+          <p>Mide tu comprensión en tiempo real</p>
+        </div>
+      </div>
+
+      <div class="feature-card f-green">
+        <span class="f-icon">🏆</span>
+        <div>
+          <h4>Gamificación</h4>
+          <p>Gana puntos y sube de nivel</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <section class="welcome-card text-center">
+      <h1>¡Bienvenido a tu plataforma de aprendizaje de Lengua!</h1>
+      <p>Explora los contenidos, completa actividades interactivas, toma evaluaciones y mejora tus habilidades lingüísticas de manera divertida y efectiva.</p>
+    </section>
+
+    <!-- Sección de unidades -->
+  <!-- SECCIÓN DE CONTENIDOS / UNIDADES -->
+<section id="seccion-contenidos" class="container mt-4">
+  <div class="row g-4">
+    
+    <!-- Tarjeta 1: Tipos de Textos -->
+    <div class="col-md-4">
+      <div class="unit-card card-blue h-100">
+        <div class="card-header">
+          <h2>Tipos de Textos</h2>
+        </div>
+        <div class="card-body">
+          <p class="description" style="color: #000000;">Aprende sobre textos narrativos, descriptivos, expositivos y argumentativos</p>
+          
+          
+          <div class="tags-section">
+            <h3>Temas:</h3>
+            <div class="tags-container">
+              <span class="tag"  >Narrativo</span><span class="tag" >Descriptivo</span>
+              <span class="tag" >Expositivo</span><span class="tag" >Argumentativo</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-start" onclick="window.location.href='unidad1.html'">Comenzar Unidad</button>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2: Clases de Palabras -->
+    <div class="col-md-4">
+      <div class="unit-card card-green h-100">
+        <div class="card-header">
+          <h2>Clases de Palabras</h2>
+        </div>
+        <div class="card-body">
+          <p class="description" >Domina sustantivos, adjetivos, verbos, adverbios y pronombres</p>
+
+          <div class="tags-section">
+            <h3>Temas:</h3>
+            <div class="tags-container">
+              <span class="tag" >Sustantivos</span><span class="tag">Adjetivos</span>
+              <span class="tag"  >Verbos</span><span class="tag">Adverbios</span><span class="tag">Pronombres</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-start" onclick="window.location.href='unidad2.html'">Comenzar Unidad</button>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3: Ortografía -->
+    <div class="col-md-4">
+      <div class="unit-card card-purple h-100">
+        <div class="card-header">
+          <h2>Ortografía</h2>
+        </div>
+        <div class="card-body">
+          <p class="description" >Mejora tu ortografía: B/V, C/S/Z, tildación y puntuación</p>
+
+          <div class="tags-section">
+            <h3>Temas:</h3>
+            <div class="tags-container">
+              <span class="tag"  >Uso de B/V</span><span class="tag">Uso de C/S/Z</span>
+              <span class="tag" >Tildación</span><span class="tag">Signos de puntuación</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-start" onclick="window.location.href='unidad3.html'">Comenzar Unidad</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+  </main>
+  
+  <section id="seccion-ayuda" class="tips-card">
+    <h2>Consejos para aprovechar la plataforma</h2>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <div class="tip-number num-blue">1</div>
+        <div class="tip-text">
+          <h3>Completa los contenidos en orden</h3>
+          <p>Cada unidad construye sobre la anterior</p>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-number num-green">2</div>
+        <div class="tip-text">
+          <h3>Practica con las actividades</h3>
+          <p>La práctica hace al maestro</p>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-number num-purple">3</div>
+        <div class="tip-text">
+          <h3>Toma las evaluaciones</h3>
+          <p>Verifica tu comprensión del tema</p>
+        </div>
+      </div>
+
+      <div class="tip-item">
+        <div class="tip-number num-orange">4</div>
+        <div class="tip-text">
+          <h3>Juega el Quiz final</h3>
+          <p>Pon a prueba todo lo aprendido</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    Plataforma Educativa de Lengua - Botta Micaela Florencia
+  </footer>
+
+ <!-- MODAL DE SELECCIÓN DE ROL Y LOGIN -->
+<div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="modalRoleTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3 border-0 shadow">
+      
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold" id="modalRoleTitle">Acceso a la plataforma</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- PASO 1: Seleccionar perfil -->
+      <div class="modal-body text-center py-4" id="pasoSeleccionRol">
+        <p class="text-muted mb-4">Seleccioná tu tipo de cuenta para continuar:</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <button type="button" class="btn btn-outline-primary w-100 py-3 rounded-3" onclick="seleccionarRol('Docente')">
+              <i class="fas fa-chalkboard-teacher fa-2x mb-2 d-block"></i>
+              <strong>Soy Docente</strong>
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-outline-success w-100 py-3 rounded-3" onclick="seleccionarRol('Alumno')">
+              <i class="fas fa-user-graduate fa-2x mb-2 d-block"></i>
+              <strong>Soy Alumno</strong>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASO 2: Formulario de Login/Registro (Se muestra dinámicamente) -->
+      <div class="modal-body py-3 d-none" id="pasoFormulario">
+        <form onsubmit="ingresarPlataforma(event)">
+          <div class="mb-3">
+            <label class="form-label">Nombre completo / Usuario</label>
+            <input type="text" id="inputNombre" class="form-control" placeholder="Ej: María Pérez" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="nombre@correo.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 fw-bold py-2 mt-3">
+            Ingresar a la Plataforma
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  let accionActual = '';
+  let rolSeleccionado = '';
+
+  // 1. Abrir el modal y resetear la vista
+  function abrirModalRole(accion) {
+    accionActual = accion;
+    document.getElementById('pasoSeleccionRol').classList.remove('d-none');
+    document.getElementById('pasoFormulario').classList.add('d-none');
+    document.getElementById('modalRoleTitle').innerText = `${accion}: Elegí tu perfil`;
+    $('#roleModal').modal('show');
+  }
+
+  // 2. Al elegir Docente o Alumno, mostramos el formulario
+  function seleccionarRol(rol) {
+    rolSeleccionado = rol;
+    document.getElementById('pasoSeleccionRol').classList.add('d-none');
+    document.getElementById('pasoFormulario').classList.remove('d-none');
+    document.getElementById('modalRoleTitle').innerText = `${accionActual} como ${rol}`;
+  }
+
+  // 3. Al enviar el formulario: Carga los datos y cambia la pantalla
+  function ingresarPlataforma(event) {
+    event.preventDefault(); // Evita recargar la página
+
+    const nombre = document.getElementById('inputNombre').value;
+    const email = document.getElementById('inputEmail').value;
+
+    // Guardamos la sesión en el navegador
+    localStorage.setItem('usuarioLogueado', JSON.stringify({
+      nombre: nombre,
+      email: email,
+      rol: rolSeleccionado
+    }));
+
+    $('#roleModal').modal('hide');
+    actualizarInterfazUsuario();
+  }
+
+  // 4. Muestra en pantalla el usuario que inició sesión
+  function actualizarInterfazUsuario() {
+    const usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+    
+    if (usuario) {
+      const contenedorBotones = document.querySelector('.auth-buttons');
+      contenedorBotones.innerHTML = `
+        <span class="badge badge-light p-2 font-weight-bold text-dark border">
+          👤 ${usuario.nombre} (${usuario.rol})
+        </span>
+        <button class="btn btn-sm btn-outline-danger ml-2" onclick="cerrarSesion()">Salir</button>
+      `;
+    }
+  }
+
+  function cerrarSesion() {
+    localStorage.removeItem('usuarioLogueado');
+    window.location.reload();
+  }
+
+  // Verificar si ya había sesión iniciada al cargar la página
+  document.addEventListener("DOMContentLoaded", actualizarInterfazUsuario);
+</script>
+
+<!--abrir y cerrar el menu-->
+<script>
+  
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    // Abre/cierra el menú al tocar el botón ☰
+    hamburgerBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Cierra el menú al hacer clic en cualquier opción
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+  </script>
+
+  <!--botones de registrarse y iniciar sesion-->
+  <script>
+  let rolSeleccionado = '';
+
+  // 1. Pasa del Paso 1 (Rol) al Paso 2 (Formulario)
+  function seleccionarRol(rol) {
+    rolSeleccionado = rol;
+    
+    // Cambia el título dinámicamente
+    document.getElementById('modalRoleTitle').textContent = `Ingresar como ${rol}`;
+    
+    // Oculta la selección de rol y muestra el formulario
+    document.getElementById('pasoSeleccionRol').classList.add('d-none');
+    document.getElementById('pasoFormulario').classList.remove('d-none');
+  }
+
+  // 2. Reinicia el modal al paso 1 cuando se vuelve a abrir
+  function reiniciarModal() {
+    document.getElementById('modalRoleTitle').textContent = 'Acceso a la plataforma';
+    document.getElementById('pasoSeleccionRol').classList.remove('d-none');
+    document.getElementById('pasoFormulario').classList.add('d-none');
+  }
+
+  // 3. Procesa el ingreso/registro
+  function ingresarPlataforma(e) {
+    e.preventDefault(); // Evita recargar la página
+    
+    const nombre = document.getElementById('inputNombre').value;
+    
+    // Guardar usuario en localStorage si querés mantener la sesión activa
+    localStorage.setItem('usuario', nombre);
+    localStorage.setItem('rol', rolSeleccionado);
+
+    alert(`¡Bienvenido/a, ${nombre} (${rolSeleccionado})!`);
+
+    // Cerrar el modal mediante Bootstrap JS o recargar
+    const modalElement = document.getElementById('roleModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+  }
+</script>
+</body>
+</html>

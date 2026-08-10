@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de lengua</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- FontAwesome para los íconos del menú (llave y usuario) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="estilos.css">
+    <!-- Favicon / Ícono de la pestaña -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+ <!-- BARRA DE NAVEGACIÓN -->
+  <nav class="navbar">
+    <!-- Logo o Título -->
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>AprendoLiteratura</span>
+    </div>
+
+    <!-- Botón Hamburguesa (solo visible en celular) -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
+      ☰
+    </button>
+
+    <!-- Enlaces del menú -->
+    <div class="nav-menu" id="nav-menu">
+      <a href="#">INICIO</a>
+      <a href="#seccion-contenidos">CONTENIDOS</a>
+      <a href="#seccion-ayuda">💡 AYUDA</a>
+      <a href="#" class="btn-yellow">REGÍSTRATE</a>
+      <a href="#" class="btn-blue">INICIAR SESIÓN</a>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="main-card container mt-4">
+    <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+
+    <div class="unit-header my-3">
+        <i class="fa-solid fa-book-open unit-icon"></i>
+        <div class="unit-titles">
+            <h2>Unidad 3: Ortografía</h2>
+            <p>Mejora tu escritura con reglas de ortografía y puntuación</p>
+        </div>
+    </div>
+   
+ <!-- CONTENEDOR PRINCIPAL -->
+<div class="card-container">
+
+  <!-- PESTAÑAS PRINCIPALES -->
+  <div class="tabs-bar mb-4">
+    <button class="tab-item active" onclick="cambiarPestana('introduccion', this)">Introducción</button>
+    <button class="tab-item" onclick="cambiarPestana('regla', this)">Reglas</button>
+    <button class="tab-item" onclick="cambiarPestana('practica', this)">Practica</button>
+    <button class="tab-item" onclick="cambiarPestana('ejercicios', this)">Ejercicios</button>
+  </div>
+
+  <!-- SECCIÓN 1: INTRODUCCIÓN-->
+  <div id="introduccion" class="tab-pane active">
+    <h2 class="title">¿Por qué es importante la ortografía?</h2>
+    <p class="intro-description">
+      La ortografía correcta es fundamental para comunicarnos efectivamente por escrito. Una buena ortografía refleja educación, profesionalismo y respeto por el lector.
+    </p>
+
+    <div class="grid-two-cols">
+      <!-- Tarjeta Azul: Beneficios -->
+      <div class="info-card blue-card">
+        <h3>Beneficios de una buena ortografía</h3>
+        <ul class="custom-list">
+          <li><span class="icon check">✓</span> Comunicación clara y efectiva</li>
+          <li><span class="icon check">✓</span> Mejora la imagen profesional</li>
+          <li><span class="icon check">✓</span> Evita malentendidos</li>
+          <li><span class="icon check">✓</span> Facilita la comprensión lectora</li>
+        </ul>
+      </div>
+
+      <!-- Tarjeta Naranja: Temas -->
+      <div class="info-card orange-card">
+        <h3>Temas de esta unidad</h3>
+        <ul class="custom-list">
+          <li><span class="icon alert">!</span> Uso de B/V</li>
+          <li><span class="icon alert">!</span> Uso de C/S/Z</li>
+          <li><span class="icon alert">!</span> Tildación</li>
+          <li><span class="icon alert">!</span> Signos de Puntuación</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 2: REGLAS -->
+  <div id="regla" class="tab-pane" style="display: none;">
+    
+    <!-- Pestañas de temas -->
+    <div class="theme-selector-card mb-4">
+      <h3 class="theme-title">Selecciona un tema</h3>
+      <div class="subtabs-bar">
+        <button class="subtab-btn active" onclick="cambiarTema('bv', this)">Uso de B/V</button>
+        <button class="subtab-btn" onclick="cambiarTema('csz', this)">Uso de C/S/Z</button>
+        <button class="subtab-btn" onclick="cambiarTema('tildacion', this)">Tildación</button>
+        <button class="subtab-btn" onclick="cambiarTema('puntuacion', this)">Signos de Puntuación</button>
+      </div>
+    </div>
+
+    <!-- CONTENIDO TEMA 1: B/V -->
+    <div id="tema-bv" class="tema-contenido" style="display: block;">
+      <div class="rule-content-card">
+        <h2 class="title">Uso de B/V</h2>
+        <p class="subtitle">Reglas para escribir correctamente con B y V</p>
+
+        <h3 class="section-subtitle">Reglas principales:</h3>
+        <ol class="rules-list">
+          <li><strong>Se escribe con B:</strong> antes de consonante (blanco, obstáculo)</li>
+          <li><strong>Se escribe con B:</strong> después de M (cambio, ombú)</li>
+          <li><strong>Se escribe con B:</strong> las terminaciones -aba, -abas del pretérito imperfecto (cantaba, jugaban)</li>
+          <li><strong>Se escribe con B:</strong> las palabras que empiezan por bu-, bur-, bus- (bueno, burla, buscar)</li>
+          <li><strong>Se escribe con V:</strong> después de N (enviar, invitar)</li>
+          <li><strong>Se escribe con V:</strong> las palabras que empiezan por eva-, eve-, evi-, evo- (evaluar, evento)</li>
+          <li><strong>Se escribe con V:</strong> después de ad-, sub- (advertir, subvención)</li>
+          <li><strong>Se escribe con V:</strong> las terminaciones -ivo, -iva (activo, defensiva)</li>
+        </ol>
+
+        <h3 class="section-subtitle">Ejemplos:</h3>
+        <div class="examples-grid">
+          <div class="example-box">
+            <strong>bravo</strong>
+            <span class="usage-tag">Usa: B</span>
+            <small>B antes de consonante</small>
+          </div>
+          <div class="example-box">
+            <strong>enviar</strong>
+            <span class="usage-tag">Usa: V</span>
+            <small>V después de N</small>
+          </div>
+          <div class="example-box">
+            <strong>cantaba</strong>
+            <span class="usage-tag">Usa: B</span>
+            <small>Terminación -aba del pretérito imperfecto</small>
+          </div>
+          <div class="example-box">
+            <strong>evento</strong>
+            <span class="usage-tag">Usa: V</span>
+            <small>Empieza por eve-</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENIDO TEMA 2: C/S/Z (Acá vas agregando el contenido de los otros temas) -->
+    <div id="tema-csz" class="tema-contenido" style="display: none;">
+      <div class="rule-content-card">
+        <h2 class="title">Uso de C/S/Z</h2>
+        <p class="subtitle">Diferencias y reglas para el uso correcto de C, S y Z</p>
+        <div class="card-container">
+
+    <h2 class="section-title">Reglas principales:</h2>
+
+    <div class="rules-list">
+      <div class="rule-item">
+        <span class="badge">1</span>
+        <span>Se escribe con C: las terminaciones -ción de sustantivos derivados de verbos terminados en -ar (actuación, celebración)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">2</span>
+        <span>Se escribe con C: las palabras terminadas en -ancia, -encia (ancia, ciencia)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">3</span>
+        <span>Se escribe con S: las terminaciones -sión de sustantivos derivados de adjetivos (comprensión, expresión)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">4</span>
+        <span>Se escribe con S: las palabras terminadas en -sivo, -siva (explosivo, comprensiva)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">5</span>
+        <span>Se escribe con Z: las terminaciones -azo, -aza que indican golpe o aumento (portazo, perrazo)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">6</span>
+        <span>Se escribe con Z: las terminaciones -ez, -eza de sustantivos abstractos (vejez, tristeza)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">7</span>
+        <span>Se escribe con Z: antes de A, O, U (zapato, zona, zumo)</span>
+      </div>
+      <div class="rule-item">
+        <span class="badge">8</span>
+        <span>Se escribe con C: antes de E, I (cena, cine)</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">Ejemplos:</h2>
+
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="example-word">canción</div>
+        <div class="example-info">Usa: <strong class="highlight">C</strong></div>
+        <div class="example-info">Terminación -ción</div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-word">comprensión</div>
+        <div class="example-info">Usa: <strong class="highlight">S</strong></div>
+        <div class="example-info">Terminación -sión</div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-word">tristeza</div>
+        <div class="example-info">Usa: <strong class="highlight">Z</strong></div>
+        <div class="example-info">Terminación -eza</div>
+      </div>
+
+      <div class="example-card">
+        <div class="example-word">cena</div>
+        <div class="example-info">Usa: <strong class="highlight">C</strong></div>
+        <div class="example-info">C antes de E</div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+
+   <!-- CONTENIDO TEMA 3: TILDACIÓN -->
+<div id="tema-tildacion" class="tema-contenido" style="display: none;">
+  <div class="rule-content-card">
+    <h2 class="title">Tildación</h2>
+    <p class="subtitle">Reglas de acentuación en español</p>
+
+    <!-- Reglas principales -->
+    <h3 class="section-title">Reglas principales:</h3>
+    <div class="rules-list">
+      <div class="rule-item">
+        <span class="badge">1</span>
+        <p><strong>AGUDAS:</strong> Se tildan si terminan en N, S o vocal (café, salón, compás)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">2</span>
+        <p><strong>GRAVES o LLANAS:</strong> Se tildan si NO terminan en N, S o vocal (árbol, fácil, azúcar)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">3</span>
+        <p><strong>ESDRÚJULAS:</strong> SIEMPRE llevan tilde (música, médico, pájaro)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">4</span>
+        <p><strong>SOBRESDRÚJULAS:</strong> SIEMPRE llevan tilde (dígaselo, cuéntamelo)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">5</span>
+        <p><strong>Monosílabos:</strong> Generalmente no se tildan, excepto tilde diacrítica (él/el, tú/tu, sí/si)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">6</span>
+        <p><strong>Diptongos:</strong> La tilde va en la vocal abierta (también, después)</p>
+      </div>
+      <div class="rule-item">
+        <span class="badge">7</span>
+        <p><strong>Hiatos:</strong> Se separa el diptongo y se tilda la vocal cerrada (María, día, oído)</p>
+      </div>
+    </div>
+
+    <!-- Ejemplos -->
+    <h3 class="section-title">Ejemplos:</h3>
+    <div class="examples-grid">
+      <div class="example-card">
+        <h4>café</h4>
+        <p class="type">Tipo: AGUDA</p>
+        <p class="description">Termina en vocal</p>
+      </div>
+      <div class="example-card">
+        <h4>árbol</h4>
+        <p class="type">Tipo: GRAVE</p>
+        <p class="description">No termina en N, S o vocal</p>
+      </div>
+      <div class="example-card">
+        <h4>música</h4>
+        <p class="type">Tipo: ESDRÚJULAS</p>
+        <p class="description">Todas se tildan</p>
+      </div>
+      <div class="example-card">
+        <h4>María</h4>
+        <p class="type">Tipo: HIATO</p>
+        <p class="description">Vocal cerrada tónica + vocal abierta</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- CONTENIDO TEMA 4: PUNTUACIÓN -->
+    <<!-- CONTENIDO TEMA 4: PUNTUACIÓN -->
+<div id="tema-puntuacion" class="tema-contenido" style="display: none;">
+  <div class="rule-content-card">
+    <h2 class="title">Signos de Puntuación</h2>
+    <p class="subtitle">Uso correcto de los signos de puntuación</p>
+
+    <!-- Sección de Reglas principales -->
+    <h3 style="margin-top: 20px; font-size: 1.1rem; color: #333;">Reglas principales:</h3>
+    <ul class="lista-reglas" style="list-style: none; padding-left: 0;">
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">1</span>
+        <span><strong>PUNTO (.):</strong> Indica pausa al final de una oración</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">2</span>
+        <span><strong>COMA (,):</strong> Separa elementos, aclaraciones o pausas breves</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">3</span>
+        <span><strong>PUNTO Y COMA (;):</strong> Pausa mayor que la coma, menor que el punto</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">4</span>
+        <span><strong>DOS PUNTOS (:):</strong> Antes de enumeraciones, citas o explicaciones</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">5</span>
+        <span><strong>SIGNOS DE INTERROGACIÓN (¿?):</strong> Enmarcan preguntas</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">6</span>
+        <span><strong>SIGNOS DE EXCLAMACIÓN (¡!):</strong> Expresan sorpresa, emoción</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">7</span>
+        <span><strong>COMILLAS (""):</strong> Para citas textuales o resaltar palabras</span>
+      </li>
+      <li style="background-color: #f8f9fa; margin-bottom: 8px; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center;">
+        <span style="background-color: #ffe8cc; color: #d97706; font-weight: bold; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; justify-content: center; align-items: center; margin-right: 12px; font-size: 0.85rem;">8</span>
+        <span><strong>PARÉNTESIS ():</strong> Para aclaraciones o información adicional</span>
+      </li>
+    </ul>
+
+    <!-- Sección de Ejemplos -->
+    <h3 style="margin-top: 25px; font-size: 1.1rem; color: #333;">Ejemplos:</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 10px;">
+      
+      <div style="background-color: #fff8f0; border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 15px; font-family: monospace; font-size: 0.95rem;">
+        Me gusta leer, escribir y estudiar.
+      </div>
+
+      <div style="background-color: #fff8f0; border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 15px; font-family: monospace; font-size: 0.95rem;">
+        ¿Cómo estás hoy?
+      </div>
+
+      <div style="background-color: #fff8f0; border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 15px; font-family: monospace; font-size: 0.95rem;">
+        ¡Qué sorpresa tan grande!
+      </div>
+
+      <div style="background-color: #fff8f0; border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 15px; font-family: monospace; font-size: 0.95rem;">
+        Necesito: papel, lápiz y borrador.
+      </div>
+
+      <div style="background-color: #fff8f0; border-left: 4px solid #ea580c; border-radius: 0 8px 8px 0; padding: 15px; font-family: monospace; font-size: 0.95rem;">
+        Mi hermano (el mayor) vive en Madrid.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <!-- OTRAS SECCIONES (Se muestran al cambiar de pestaña) -->
+  <div id="contenido" class="tab-pane" style="display: none;">
+    <h2>Contenido</h2>
+    <p>Aquí va el contenido explicativo...</p>
+  </div>
+
+  <div id="actividades" class="tab-pane" style="display: none;">
+    <h2>Actividades</h2>
+    <p>Aquí van los ejercicios y actividades...</p>
+  </div>
+
+
+</div>
+
+
+ <footer class="main-footer" style="text-align: center; color: #5a6b82; font-size: 14px; padding: 20px 10px;">
+  Plataforma Educativa de Lengua - Botta Micaela Florencia
+</footer>
+
+</html>
+
+<!--UNIDAD 3 PASO DE CADA BOTON DE SECCIONES EN LA UNIDAD-->
+<script>
+  function cambiarPestana(idPestana, elementoBoton) {
+  // 1. Quita la clase 'active' de todos los botones
+  const botones = document.querySelectorAll('.tab-item');
+  botones.forEach(btn => btn.classList.remove('active'));
+
+  // 2. Oculta todos los paneles de contenido
+  const paneles = document.querySelectorAll('.tab-pane');
+  paneles.forEach(panel => {
+    panel.style.display = 'none';
+    panel.classList.remove('active');
+  });
+
+  // 3. Activa el botón clickeado
+  elementoBoton.classList.add('active');
+
+  // 4. Muestra la sección elegida
+  const panelObjetivo = document.getElementById(idPestana);
+  if (panelObjetivo) {
+    panelObjetivo.style.display = 'block';
+    panelObjetivo.classList.add('active');
+  }
+}
+</script>
+<script>
+<!--reglas-->
+function cambiarTema(idTema, elementoBoton) {
+  // 1. Ocultar todos los temas
+  const temas = document.querySelectorAll('.tema-contenido');
+  temas.forEach(tema => tema.style.display = 'none');
+
+  // 2. Quitar la clase active de los botones de tema
+  const botones = document.querySelectorAll('.subtab-btn');
+  botones.forEach(btn => btn.classList.remove('active'));
+
+  // 3. Mostrar el tema elegido y activar su botón
+  document.getElementById('tema-' + idTema).style.display = 'block';
+  elementoBoton.classList.add('active');
+}
+</script>
+
+<script>
+  // Respuestas correctas para cada pregunta (coincide con los values de los inputs)
+  const respuestasCorrectas = {
+    p1: "V",    // EnViar
+    p2: "B",    // CeleBración
+    p3: "S",    // ExpreSión
+    p4: "Café", // Café
+    p5: "¿?",   // ¿?
+    p6: "B"     // cantaBa
+  };
+
+  document.querySelector('.btn-submit').addEventListener('click', function () {
+    let aciertos = 0;
+    const totalPreguntas = Object.keys(respuestasCorrectas).length;
+
+    // Recorremos cada pregunta
+    for (const [pregunta, respuestaCorrecta] of Object.entries(respuestasCorrectas)) {
+      // Buscamos la opción seleccionada para esa pregunta
+      const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+      
+      // Buscamos la tarjeta contenedora de esta pregunta para aplicarle feedback visual
+      const tarjeta = document.querySelector(`input[name="${pregunta}"]`)?.closest('.question-card');
+
+      if (!tarjeta) continue;
+
+      if (!seleccionada) {
+        // No respondió la pregunta
+        tarjeta.style.border = '1.5px solid #f59e0b'; // Borde amarillo/naranja
+        tarjeta.style.backgroundColor = '#fffbeb';
+      } else if (seleccionada.value === respuestaCorrecta) {
+        // Respuesta Correcta
+        aciertos++;
+        tarjeta.style.border = '1.5px solid #10b981'; // Borde verde
+        tarjeta.style.backgroundColor = '#ecfdf5';
+      } else {
+        // Respuesta Incorrecta
+        tarjeta.style.border = '1.5px solid #ef4444'; // Borde rojo
+        tarjeta.style.backgroundColor = '#fef2f2';
+      }
+    }
+
+    // Mostrar alerta simple con la nota/resultado
+    setTimeout(() => {
+      alert(`Obtuviste ${aciertos} de ${totalPreguntas} respuestas correctas.`);
+    }, 100);
+  });
+</script>
+</body>

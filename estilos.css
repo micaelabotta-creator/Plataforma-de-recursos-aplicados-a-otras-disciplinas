@@ -1,0 +1,2194 @@
+/* Estilos Base y Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+/* Previene que los elementos rompan el ancho de pantalla */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, html {
+  max-width: 100vw;
+  overflow-x: hidden; /* Evita el scroll horizontal molesto */
+}
+
+/* Imágenes y svgs fluidos */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 1. BARRA DE NAVEGACIÓN (NAVBAR) */
+.navbar {
+  background-color: #ffffff;
+  padding: 12px 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.nav-container {
+ max-width: 1200px;
+  margin: 0 auto;
+}
+.logo {
+ display: flex;
+  align-items: center;
+  gap: 12px; /* Espacio entre el gráfico y el texto AprendoLiteratura */
+}
+/* Controla el tamaño de la imagen */
+.logo img, .logo-img {
+  height: 40px;          /* Ajustá entre 35px y 50px según tu gusto */
+  width: auto;           /* Mantiene la proporción sin deformarlo */
+  object-fit: contain;
+}
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+/* Botones de navegación con los colores del Figma */
+.btn-nav {
+ display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    /* Reducción del redondeado para que se vean rectangulares pero suaves */
+    border-radius: 8px; 
+    padding: 10px 22px;
+    transition: background-color 0.2s;
+}
+.btn-blue { background-color: #1a66ff; }
+.btn-green { background-color: #00b347; }
+.btn-purple { background-color: #9933ff; }
+
+/* Sub-barra de progreso general */
+.nav-subbar {
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* Color de fuente gris intermedio y tipografía limpia */
+    color: #64748b; 
+    font-size: 14px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+/* CONTENEDOR CENTRAL DE LA PÁGINA */
+.main-content {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Espacio vertical controlado entre elementos */
+}
+
+/* 2. TARJETA DE BIENVENIDA (Fondo blanco entero) */
+.welcome-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+.welcome-card h1 {
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+.welcome-card p {
+  color: #64748b;
+  font-size: 1.05rem;
+  max-width: 850px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* 3. CONTENEDOR DE TARJETAS (Fila impecable) */
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Divide el espacio en 3 columnas idénticas */
+  gap: 24px;
+}
+
+/* Estructura de las Tarjetas de pagina de inicio */
+.unit-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Esto arregla los bordes redondeados de arriba */
+  /* Esta línea hace que el movimiento sea suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/*movimiento de las tarjetas en el inicio*/
+/* El movimiento ocurre cuando pasas el mouse por encima */
+.unit-card:hover {
+  transform: translateY(-10px); /* La mueve hacia arriba */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Aumenta la sombra para dar efecto de elevación */
+}
+
+.card-header {
+  padding: 24px;
+  color: #ffffff;
+  text-align: center;
+}
+.card-header h2 {
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+
+/* Colores de las cabeceras */
+.card-blue .card-header   { background-color: #1a66ff; }
+.card-green .card-header  { background-color: #00b347; }
+.card-purple .card-header { background-color: #9933ff; }
+
+.card-body {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.description {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Progreso */
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #475467;
+  font-weight: 600;
+}
+.progress-bar-bg {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  height: 8px;
+}
+.progress-bar-fill {
+  background-color: #94a3b8;
+  height: 100%;
+  width: 0%; /* Empieza en cero */
+  border-radius: 4px;
+}
+
+/* Etiquetas */
+.tags-section h3 {
+  font-size: 0.85rem;
+  color: #344054;
+  margin-bottom: 8px;
+}
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+/* Botón inferior */
+.btn-start {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0 24px 24px 24px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card-blue .btn-start   { background-color: #1a66ff; }
+.card-green .btn-start  { background-color: #00b347; }
+.card-purple .btn-start { background-color: #9933ff; }
+
+/* Modifica la clase que ya tienes */
+.nav-container {
+  display: flex;
+  justify-content: space-between; /* Empuja los 3 bloques internos hacia los extremos */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Asegúrate de que el grupo de botones tenga un espacio (gap) entre sí */
+.nav-links {
+gap: 24px;
+}
+
+
+/* Contenedor principal de la sección de consejos */
+.tips-card {
+width: 100%;             /* Ocupa todo el ancho disponible */
+  max-width: 1200px;       /* Mismo ancho máximo que el contenedor de las 3 tarjetas de arriba */
+  margin: 30px auto;       /* La centra horizontalmente */
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tips-card h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* Distribución en dos columnas usando Grid */
+.tips-grid {
+ display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+  margin-top: 20px;
+}
+
+/* Estructura interna de cada consejo individual */
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* El círculo del número */
+.tip-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Variaciones de colores para los números según Figma */
+.num-blue {
+  background-color: #e8f0fe;
+  color: #1a73e8; }
+.num-green { 
+  background-color: #e6f4ea;
+  color: #137333;}
+.num-purple { 
+   background-color: #f3e8fd;
+  color: #9333ea;}
+.num-orange { 
+   background-color: #fef7e0;
+  color: #b06000; }
+
+/* Textos de los consejos */
+.tip-text h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #202124;
+  line-height: 1.3;
+}
+
+.tip-text p {
+   margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #5f6368;
+}
+
+
+/* Estilo para el Footer del final de página */
+.main-footer {
+  text-align: center; /* Centra el texto horizontalmente */
+  color: #64748b;     /* El color gris suave que tiene en el Figma */
+  font-size: 0.9rem;  /* Tamaño de la fuente ajustable */
+  width: 100%;        /* Asegura que ocupe todo el ancho para poder centrarse */
+  padding: 30px 0;    /* Le da espacio arriba y abajo para que respire */
+  margin-top: 20px;   /* Separa el footer de la tarjeta de consejos */
+}
+
+/*pagina unidad 1*/
+/* Contenedor Blanco Principal */
+.main-card {
+    background-color: #ffffff;
+    border-radius: 20px; /* Bordes bien redondeados como en Figma */
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Sombra muy suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px; /*aumentamos el ancho de la tarjeta de la unidad 1*/
+    width: 100%;
+    margin-top: 24px auto 0 auto; /*centrado de tarjeta automaticamente*/
+    margin: 40px auto
+
+}
+
+/* Enlace Volver al Inicio */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1a66ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Encabezado (Icono + Textos) */
+.unit-header {
+    display: flex;
+    align-items: flex-start; /* Alinea el icono arriba con el título */
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.unit-icon {
+    color: #1a66ff;
+    font-size: 2.2rem;
+    margin-top: 2px;
+}
+
+.unit-titles h2 {
+    color: #1e293b;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.unit-titles p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* Barra de Pestañas */
+.tabs-bar {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo Base de los Botones de Pestaña */
+.tab-item {
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f1f5f9; /* Gris clarito para botones inactivos */
+    color: #475569;
+}
+
+/* Estado de la Pestaña Activa (Introducción) */
+.tab-item.active {
+    background-color: #1a66ff; /* Azul brillante */
+    color: #ffffff;
+}
+
+/* Efecto Hover para los Inactivos */
+.tab-item:not(.active):hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+}
+/*segunda seccion de unidad 1*/
+/* Espaciado superior extra para esta tarjeta de selección si lo requieres */
+.selection-section {
+    margin-top: 24px;
+}
+
+/* Título interno */
+.selection-section h3 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Cuadrícula para los 4 botones iguales */
+.text-types-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas del mismo tamaño */
+    gap: 16px; /* Separación horizontal entre los botones */
+}
+
+/* Estilo Base para cada botón de tipo de texto */
+.type-btn {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0; /* Borde gris sutil de Figma */
+    border-radius: 10px;
+    padding: 16px 0; /* Espaciado interno arriba y abajo */
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+/* Estado del botón activo (Seleccionado: Narrativo) */
+.type-btn.active {
+    background-color: #e6f0ff; /* Fondo azul sumamente claro */
+    border: 2px solid #1a66ff;  /* Borde azul más grueso e intenso */
+    color: #000000;
+}
+
+/* Efecto Hover para los botones que no están activos */
+.type-btn:not(.active):hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+/*Tercera seccion de unidad 1*/
+/* Espaciado para separar esta tarjeta de la anterior */
+.content-section {
+    margin-top: 24px;
+}
+
+.content-section h3 {
+    font-size: 1.4rem;
+    color: #1e293b;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.main-description {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Distribución en 2 columnas perfectas */
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 16px; /* Separación uniforme entre las tarjetas */
+}
+
+/* Estilo general compartido por las 4 sub-tarjetas */
+.info-block {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid transparent; /* Se sobreescribe abajo */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-block h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.info-block p {
+    font-size: 0.88rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- Variaciones de color según el diseño de Figma --- */
+
+/* 1. Azul (Narrativo) */
+.block-blue {
+    background-color: #f0f6ff;
+    border-color: #dbeafe;
+}
+.block-blue h4 { color: #1a66ff; }
+
+/* 2. Verde (Descriptivo) */
+.block-green {
+    background-color: #f0fdf4;
+    border-color: #dcfce7;
+}
+.block-green h4 { color: #00b347; }
+
+/* 3. Morado (Expositivo) */
+.block-purple {
+    background-color: #faf5ff;
+    border-color: #f3e8ff;
+}
+.block-purple h4 { color: #9933ff; }
+
+/* 4. Naranja / Crema (Argumentativo) */
+.block-orange {
+    background-color: #fdf8f2;
+    border-color: #fee2e2; /* Un borde sutilmente cálido */
+}
+.block-orange h4 { color: #1e293b; } 
+
+/*PAGINA WEB QUIZ*/
+/* CONFIGURACIÓN GENERAL / RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f3f4fd; /* Fondo sutilmente azulado/grisáceo de tu captura */
+    color: #1e293b;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* NAVBAR SUPERIOR */
+/* BUSCÁ ESTA SECCIÓN EN TU STYLES.CSS Y REEMPLAZALA */
+.navbar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between; /* Esto empuja los botones a la derecha */
+    align-items: center;
+    padding: 12px 40px;
+    border-bottom: 2px solid #e2e8f0;
+    width: 100%; /* Forzamos a que ocupe todo el ancho disponible */
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    margin-left: auto; /* Asegura que el grupo de botones se pegue a la derecha */
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1d4ed8;
+}
+
+.logo-icon {
+    font-size: 28px;
+}
+
+.nav-logo h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* BOTONES DE NAVEGACIÓN */
+.btn-nav {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.8px;
+  color: #4a5568 !important; /* Texto gris limpio como en la foto */
+  text-decoration: none !important;
+  background: transparent !important; /* Quita los fondos azul, verde y violeta */
+  padding: 6px 10px;
+  transition: color 0.2s ease;
+}
+
+.btn-nav:hover {
+  color: #0d9ebd !important;
+}
+.btn-blue { background-color: #2563eb; }
+.btn-green { background-color: #16a34a; }
+.btn-purple { background-color: #9333ea; }
+
+/* SUB-BARRA DE PROGRESO */
+.sub-bar {
+    background-color: #ffffff;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sub-icon {
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.main-container {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* TARJETA ENCABEZADO DE QUIZ */
+.quiz-header-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.back-link {
+    color: #16a34a;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.quiz-header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.trophy-small {
+    font-size: 40px;
+    color: #d97706; /* Color dorado */
+}
+
+.quiz-header-text h3 {
+    font-size: 22px;
+    color: #0f172a;
+}
+
+.quiz-header-text p {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* TARJETA CENTRAL DEL DESAFÍO */
+.challenge-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trophy-large {
+    font-size: 80px;
+    color: #d97706;
+    margin-bottom: 15px;
+}
+
+.challenge-title {
+    font-size: 26px;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.challenge-subtitle {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* GRID DE DETALLES (TIEMPO, RACHA, ETC.) */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.feature-box {
+    border-radius: 10px;
+    padding: 20px 15px;
+    text-align: left;
+}
+
+.feature-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.feature-box p {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.4;
+}
+
+/* COLORES ESPECÍFICOS DE LAS TARJETITAS */
+.box-blue { background-color: #eff6ff; }
+.text-blue { color: #2563eb; }
+
+.box-green { background-color: #f0fdf4; }
+.text-green { color: #16a34a; }
+
+.box-purple { background-color: #faf5ff; }
+.text-purple { color: #9333ea; }
+
+/* BOTÓN COMENZAR */
+.btn-start {
+    background-color: #00c040; /* El verde brillante del botón iniciar */
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #009030; /* Efecto 3D abajo del botón */
+    transition: all 0.1s ease;
+}
+
+.btn-start:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 #009030;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #64748b;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    margin-top: auto;
+}
+
+/*estilos de quiz1*/
+/* ==========================================================================
+   NUEVOS ESTILOS PARA LA PANTALLA DE PREGUNTAS (image_5e31e1.png)
+   ========================================================================== */
+
+/* Ajuste de flexbox para el encabezado con puntaje */
+.header-split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-right-score {
+    text-align: center;
+}
+
+.score-number {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.score-label {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Tarjeta intermedia de estado */
+.status-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.question-number {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Contenedor gris de la barra */
+.progress-bar-container {
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    width: 250px;
+    overflow: hidden;
+}
+
+/* El relleno violeta */
+.progress-bar-fill {
+    background-color: #6366f1;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Tags / Etiquetas */
+.tags-container {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.tag-easy { background-color: #dcfce7; color: #16a34a; }
+.tag-topic { background-color: #e0f2fe; color: #0284c7; }
+.tag-points { background-color: #f3e8ff; color: #7c3aed; }
+
+/* El contador de tiempo a la derecha */
+.status-right-timer {
+    text-align: center;
+    padding-left: 20px;
+}
+
+.timer-number {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+}
+
+.timer-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Tarjeta blanca de la pregunta */
+.question-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 35px 25px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.question-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 30px;
+}
+
+/* Grilla de respuestas 2 columnas x 2 filas */
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+/* Botones base de respuestas */
+.btn-answer {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-answer:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* Colores exactos de los botones de opciones con su respectivo borde inferior 3D */
+.answer-red { 
+    background-color: #ef4444; 
+    box-shadow: 0 4px 0 #b91c1c;
+}
+.answer-blue { 
+    background-color: #3b82f6; 
+    box-shadow: 0 4px 0 #1d4ed8;
+}
+.answer-yellow { 
+    background-color: #eab308; 
+    box-shadow: 0 4px 0 #a16207;
+}
+.answer-green { 
+    background-color: #22c55e; 
+    box-shadow: 0 4px 0 #15803d;
+}
+
+/* --- BOTONES DE REGISTRO E INICIO DE SESIÓN --- */
+.auth-buttons {
+ display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50px; /* Redondeado completo estilo píldora */
+  padding: 10px 22px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.btn-auth .icon-btn {
+  margin-right: 8px;
+  font-size: 0.85rem;
+}
+/* Botón Regístrate (Amarillo/Naranja) */
+.btn-registrate {
+  background-color: #f2b738;
+}
+.btn-registrate:hover {
+background-color: #e0a526;
+  color: #ffffff;
+}
+/* Botón Iniciar Sesión (Azul Cyan) */
+.btn-iniciar {
+background-color: #0d9ebd;
+}
+.btn-iniciar:hover {
+ background-color: #0b8a9d;
+  color: #ffffff;
+}
+/* Divisor y Subbar */
+.nav-divider {
+  border: 0;
+  border-top: 1px solid #edf2f7;
+  margin: 10px 0;
+}
+
+.nav-subbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  font-size: 0.85rem;
+  color: #718096;
+  font-weight: 600;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/*banner*/
+/* --- HERO BANNER --- */
+.hero-banner {
+  background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+  border-radius: 20px;
+  padding: 40px 30px;
+  margin: 20px auto 40px auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.badge-tag {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #0284c7;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.hero-content h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Botones del Banner */
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-primary-hero {
+  background-color: #0d9ebd;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(13, 158, 189, 0.25);
+}
+
+.btn-primary-hero:hover {
+  background-color: #0b8a9d;
+  transform: translateY(-2px);
+}
+
+.btn-secondary-hero {
+  background-color: #ffffff;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-secondary-hero:hover {
+  background-color: #f1f5f9;
+  transform: translateY(-2px);
+}
+
+/* Tarjetas de características del lado derecho */
+.hero-features {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-left: 5px solid transparent;
+}
+
+.f-blue { border-left-color: #0d9ebd; }
+.f-purple { border-left-color: #9333ea; }
+.f-green { border-left-color: #22c55e; }
+
+.f-icon {
+  font-size: 1.8rem;
+}
+
+.feature-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.feature-card p {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/*ESTILOS DE SECCION UNIDAD 1 HTML*/
+/* Layout general del contenido */
+.card-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  max-width: 850px;
+  margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1e293b;
+}
+
+/* Títulos y descripción */
+.card-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.card-content .description {
+  color: #64748b;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.card-content h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 20px 0 12px 0;
+}
+
+/* Lista de características con tilde verde */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+/* Ícono de verificado verde */
+.features-list li::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #16a34a;
+  border-radius: 50%;
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Caja de Ejemplo (Azul Narrativo) */
+.example-box {
+  background-color: #eff6ff;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 8px 8px 0;
+  padding: 18px 20px;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #1e3a8a;
+}
+/* Tarjeta contenedora del selector */
+.selector-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  max-width: 850px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin-bottom: 24px; /* Podés subir a 30px o 32px si querés más separación */
+}
+
+/* Título superior */
+.selector-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+}
+
+/* Grilla de 4 columnas para los botones */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* Botones inactivos (por defecto) */
+.topic-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+/* Efecto al pasar el mouse por encima */
+.topic-btn:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+}
+
+/* Botón activo (Seleccionado, ej: Narrativo) */
+.topic-btn.active {
+  background-color: #e0edff; /* Fondo azul clarito */
+  border: 1.5px solid #3b82f6; /* Borde azul definido */
+  color: #0f172a;
+}
+
+/*texto de tipo de texto -seccion unidad 1*/
+.card.margin-bottom {
+    margin-bottom: 5%;
+}
+/*botones de tipo de texto*/
+.tipo-texto {
+  margin-top: 20px;       /* 👈 Esto BAJA el texto alejándolo de arriba */
+  margin-bottom: 16px;    /* Reducí esto para que no quede tanto espacio naranja */
+}
+/*actividades unidad 1*/
+/* Card principal de actividades */
+.card-actividades {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  max-width: 850px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.card-actividades h2 { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+.card-actividades .subtitle { color: #64748b; font-size: 14px; margin-bottom: 24px; }
+
+/* Tarjeta individual de pregunta */
+.question-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.question-text { font-size: 14.5px; color: #1e293b; margin-bottom: 16px; line-height: 1.5; }
+
+/* Opciones seleccionables */
+.options-group { display: flex; flex-direction: column; gap: 10px; }
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #334155;
+  transition: background-color 0.2s;
+}
+
+.option-item:hover { background-color: #f8fafc; }
+.option-item input[type="radio"] { accent-color: #2563eb; width: 16px; height: 16px; }
+
+/* Estados de Acierto / Error */
+.question-card.correct { border: 1.5px solid #16a34a; background-color: #f0fdf4; }
+.question-card.incorrect { border: 1.5px solid #dc2626; background-color: #fef2f2; }
+
+.feedback-msg { font-size: 13.5px; font-weight: 600; margin-top: 12px; }
+.feedback-msg.correct-text { color: #15803d; }
+.feedback-msg.incorrect-text { color: #b91c1c; }
+
+/* Botón Enviar */
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+.btn-submit:hover { background-color: #1d4ed8; }
+
+/* Resumen final */
+.result-summary {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+/*estilo de evaluacion undiad 1*/
+/* Contenedor principal de evaluación */
+.eval-card-container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  max-width: 850px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.eval-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.eval-header h2 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+.eval-header .subtitle { color: #64748b; font-size: 14px; }
+
+/* Badges de puntaje */
+.stats-badge { display: flex; gap: 10px; }
+.badge-item {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13.5px;
+  color: #334155;
+}
+
+/* Barra de progreso */
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  transition: width 0.4s ease;
+}
+
+/* Tarjeta interactiva */
+.quiz-card {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card-badge {
+  display: inline-block;
+  background: #e0edff;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-question {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* Grilla de Opciones Lúdicas */
+.game-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .game-options { grid-template-columns: 1fr; }
+}
+
+.game-opt-btn {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.game-opt-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  transform: translateY(-2px);
+}
+
+/* Estados Acierto / Error */
+.game-opt-btn.correct-opt {
+  background-color: #dcfce7 !important;
+  border-color: #16a34a !important;
+  color: #15803d !important;
+}
+
+.game-opt-btn.incorrect-opt {
+  background-color: #fee2e2 !important;
+  border-color: #ef4444 !important;
+  color: #b91c1c !important;
+}
+
+/* Banner de Retroalimentación */
+.feedback-banner {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+.feedback-banner.success { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.feedback-banner.error { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+
+/* Botón Siguiente */
+.btn-next {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-next:hover { background: #1d4ed8; }
+
+/* Pantalla de Resultados */
+.results-card {
+  text-align: center;
+  padding: 20px;
+}
+.trophy-icon { font-size: 50px; margin-bottom: 12px; }
+.final-msg-box {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  font-size: 15px;
+  color: #334155;
+}
+.btn-retry {
+  padding: 12px 28px;
+  background: #0f172a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/*unidad 2*/
+/* Tarjeta de cada opción seleccionable */
+.opcion-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 18px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0;
+  font-weight: 500;
+  color: #334155;
+}
+
+.opcion-card:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.opcion-card input[type="radio"] {
+  accent-color: #059669; /* Verde al seleccionar */
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Botón Verificar Respuestas estilo deshabilitado por defecto / activo */
+.btn-verificar {
+  background-color: #cbd5e1;
+  color: #ffffff;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-verificar:hover {
+  background-color: #059669;
+  color: #ffffff;
+}
+
+/* Clases de Feedback de Acierto / Error */
+.card-correcta {
+  border: 1.5px solid #10b981 !important;
+  background-color: #f0fdf4 !important;
+}
+
+.card-incorrecta {
+  border: 1.5px solid #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.msg-correcto {
+  color: #059669;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.msg-incorrecto {
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 14px;
+}
+/*practica interactiva de unidad 2*/
+/* Fichas de Palabras Arrastrables */
+.palabra-chip {
+  display: inline-block;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  padding: 8px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.palabra-chip:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+/* Cajas Destino con Borde Punteado */
+.caja-drop {
+  border: 1.5px dashed #cbd5e1;
+  background-color: #ffffff;
+  min-height: 110px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Efecto al arrastrar una ficha sobre una caja */
+.caja-drop.drag-hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* Estilos de Validación (Acierto / Error) */
+.chip-correcto {
+  background-color: #dcfce7 !important;
+  color: #15803d !important;
+}
+
+.chip-incorrecto {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+/* Botón Reiniciar estilo oscuro */
+.btn-reiniciar {
+  background-color: #334155;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+  background-color: #1e293b;
+}
+
+/*tarjetas de pagina de inicio*/
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/*/
+/* --- ESTILOS EN COMPUTADORA --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: relative; /* Para poder posicionar el menú en mobile */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.hamburger-btn {
+  display: none; /* Oculto en PC */
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+
+
+/* --- ESTILOS EN CELULAR (Pantallas menores a 768px) --- */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block; /* Muestra las 3 rayitas ☰ */
+  }
+
+  .nav-menu {
+    display: none; /* Oculta los textos horizontales */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Despliega justo debajo de la barra */
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .nav-menu a {
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Se activa al hacer clic con JS */
+  .nav-menu.active {
+    display: flex;
+  }
+}
+/* 1. Quita el subrayado a TODOS los enlaces del menú y fija el color */
+.nav-menu a,
+.navbar a {
+  text-decoration: none !important; /* Quita la línea subrayada */
+  color: #0284c7;                  /* Color azul del texto */
+  transition: all 0.3s ease;       /* Transición suave para los cambios de color */
+}
+/*unidad 3*/
+/* Contenedor Tarjeta Principal */
+.card-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 28px 36px;
+  
+  /* Ajustes para centrar horizontalmente */
+  max-width: 1000px;       /* Ancho máximo similar al de la segunda foto */
+  width: 90%;             /* Se adapta en pantallas más chicas */
+  margin: 40px auto;      /* Centra el bloque horizontalmente y da espacio arriba/abajo */
+  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+/* Botón Volver al inicio */
+.back-btn {
+  background: none;
+  border: none;
+  color: #8b12eb;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 4px 0;
+  transition: opacity 0.2s ease;
+}
+
+.back-btn:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Encabezado del título con ícono */
+.header-title-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.pencil-icon {
+  width: 28px;
+  height: 28px;
+  color: #8b12eb;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.title-wrapper h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1e1e24;
+  line-height: 1.2;
+}
+
+.title-wrapper p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Barra de Navegación / Botones */
+.tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tab-btn {
+  background-color: #f2f3f7;
+  color: #2b3342;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: #e4e6ed;
+}
+
+/* Estado Activo del Botón */
+.tab-btn.active {
+  background-color: #1d66fe;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(139, 18, 235, 0.25);
+}
+
+/*otras confi de unidad 3*/
+/* Oculta los paneles por defecto */
+.tab-pane {
+  display: none;
+  padding-top: 20px;
+}
+
+/* Muestra únicamente el panel activo */
+.tab-pane.active {
+  display: block;
+}
+
+/* Estilos de la tarjeta de Introducción */
+.intro-description {
+  color: #555;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.grid-two-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.info-card {
+  padding: 20px 24px;
+  border-radius: 12px;
+}
+
+.info-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-card li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.info-card .icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Variación Azul */
+.blue-card {
+  background-color: #f0f7ff;
+  border-left: 4px solid #1a56db;
+}
+
+.blue-card h3 {
+  color: #1a56db;
+}
+
+.blue-card .icon {
+  stroke: #1a56db;
+}
+
+/* Variación Naranja */
+.orange-card {
+  background-color: #fff9f2;
+  border-left: 4px solid #c2410c;
+}
+
+.orange-card h3 {
+  color: #c2410c;
+}
+
+.orange-card .icon {
+  stroke: #ea580c;
+}
+/*estilos de botones de unidad 3 - reglas*/
+/* Card contenedora de "Selecciona un tema" */
+.theme-selector-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 24px; /* O usa la clase mb-4 que ya tenés */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+/* Título de la card */
+.theme-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Contenedor de los 4 botones en fila con separación */
+.subtabs-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; /* Separación entre los botones */
+}
+
+/* Estilo base de los botones */
+.subtab-btn {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Estado hover (al pasar el mouse) */
+.subtab-btn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Estado ACTIVO (el botón seleccionado) */
+.subtab-btn.active {
+  background-color: #e0edff;
+  border: 2px solid #2563eb;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+/*practica unidad 3*/
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: #0f172a;
+}
+
+/* Lista de Preguntas */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Tarjeta individual de pregunta */
+.question-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.question-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 16px 0;
+}
+
+/* Grupo de botones de opción */
+.options-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Label que simula la cápsula/botón */
+.option-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  user-select: none;
+  min-width: 80px;
+}
+
+.option-btn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Ocultamos el radio genérico */
+.option-btn input[type="radio"] {
+  display: none;
+}
+
+/* Custom Radio Dot */
+.radio-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #334155;
+  display: inline-block;
+}
+
+/* Texto de la opción */
+.option-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Estado Seleccionado */
+.option-btn input[type="radio"]:checked + .radio-dot {
+  background-color: #7c3aed; /* Violeta activo de la UI */
+  box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+.option-btn:has(input[type="radio"]:checked) {
+  border-color: #7c3aed;
+  background-color: #f5f3ff;
+}
+
+/* Botón Verificar Respuestas */
+.btn-submit {
+  width: 100%;
+  background-color: #cbd5e1;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: #94a3b8;
+}
+/*tildacion* unidad 3/
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+/* Estilos de las reglas numeradas */
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 12px 16px;
+  border-radius: 12px;
+  gap: 15px;
+}
+
+.rule-item p {
+  margin: 0;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.badge {
+  background-color: #f3e8ff;
+  color: #a855f7;
+  font-weight: bold;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Estilos de las tarjetas de ejemplos */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.example-card {
+  background-color: #fcfaff;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.example-card h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.example-card .type {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.example-card .description {
+  margin: 4px 0 0 0;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+/*estilos para movil*/
+/* 1. Previene el scroll horizontal no deseado en toda la pantalla */
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* 2. Ajuste del encabezado y la barra superior en celulares */
+.navbar, .nav, header {
+  flex-wrap: wrap !important;
+}
+
+/* 3. Permitir deslizamiento horizontal suave para las solapas (Introducción, Contenido, etc.) */
+.nav-pills, .nav-tabs, .btn-group {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100% !important;
+  padding-bottom: 5px;
+}
+
+/* 4. Adaptación de las tarjetas de botones (Narrativo, Descriptivo, Expositivo, Argumentativo) */
+@media (max-width: 768px) {
+  /* Permite que los contenedores de botones salten de línea en pantallas chicas */
+  .d-flex, .row {
+    flex-wrap: wrap !important;
+  }
+
+  /* Evita que los botones o textos largos rompan el ancho de la pantalla */
+  .btn, .card {
+    max-width: 100% !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+}

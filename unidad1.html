@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de lengua</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+ <!--MENU DE NAVEGACIÓN-->
+    <nav class="navbar">
+    <!--CONTENEDOR DEL MENU DE NAVEGACIÓN-->
+  <div class="nav-container">
+    <div class="logo">
+      <span class="logo-icon">📖</span> 
+      <strong>AprendoLiteratura</strong>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="btn-nav btn-blue">Inicio</a>
+      <a href="#" class="btn-nav btn-green">🎮 Quiz</a>
+      <a href="tutorial.html" class="btn-nav btn-purple">💡 Tutorial</a>
+    </div>
+  </div>
+  <!--CIERRE DEL CONTENEDOR-->
+  <div class="nav-subbar">
+    <span>Progreso General: 0%</span>
+    <span>🎓 Puntos: 0</span>
+  </div>
+</nav>
+<!--CIERRE DE MENU DE NAVEGACIÓN-->
+
+<!--NUEVA PARTE DE PAGINA WEB-->
+
+        <main class="content-card">
+                 
+<div class="main-card">
+    <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+
+    <div class="unit-header">
+        <i class="fa-solid fa-book-open unit-icon"></i>
+        <div class="unit-titles">
+            <h2>Unidad 1: Tipos de Textos</h2>
+            <p>Aprende a identificar y crear diferentes tipos de textos</p>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS PRINCIPALES -->
+<div class="tabs-bar">
+  <button class="tab-item" onclick="cambiarPestana('introduccion', this)">Introducción</button>
+  <button class="tab-item active" onclick="cambiarPestana('contenido', this)">Contenido</button>
+  <button class="tab-item" onclick="cambiarPestana('actividades', this)">Actividades</button>
+  <button class="tab-item" onclick="cambiarPestana('evaluacion', this)">Evaluación</button>
+</div>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<div id="sec-introduccion" class="tab-content d-none">
+  <div class="card p-4">
+    
+    <!-- Encabezado de la Sección -->
+    <h2 class="fw-bold mb-3">¿Qué son los tipos de textos?</h2>
+    <p class="text-secondary mb-4">
+      Los textos se pueden clasificar según su intención comunicativa y estructura. Cada tipo de texto tiene características específicas que lo hacen único y apropiado para diferentes situaciones.
+    </p>
+
+    <!-- Grilla de Tarjetas (2 columnas en pantallas medianas/grandes) -->
+    <div class="row g-3">
+      
+      <!-- Texto Narrativo -->
+      <div class="col-md-6">
+        <div class="p-3 rounded-3 h-100" style="background-color: #f0f7ff; border: 1px solid #d0e3ff;">
+          <h5 class="fw-bold text-primary">Texto Narrativo</h5>
+          <p class="mb-0 text-muted small">
+            Cuenta una historia con personajes, acciones y acontecimientos en un tiempo y lugar determinados.
+          </p>
+        </div>
+      </div>
+
+      <!-- Texto Descriptivo -->
+      <div class="col-md-6">
+        <div class="p-3 rounded-3 h-100" style="background-color: #f0fdf4; border: 1px solid #dcfce7;">
+          <h5 class="fw-bold text-success">Texto Descriptivo</h5>
+          <p class="mb-0 text-muted small">
+            Representa personas, objetos, lugares o situaciones mediante palabras, detallando sus características.
+          </p>
+        </div>
+      </div>
+
+      <!-- Texto Expositivo -->
+      <div class="col-md-6">
+        <div class="p-3 rounded-3 h-100" style="background-color: #faf5ff; border: 1px solid #f3e8ff;">
+          <h5 class="fw-bold" style="color: #8b5cf6;">Texto Expositivo</h5>
+          <p class="mb-0 text-muted small">
+            Explica o informa sobre un tema de manera objetiva y clara, transmitiendo conocimientos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Texto Argumentativo -->
+      <div class="col-md-6">
+        <div class="p-3 rounded-3 h-100" style="background-color: #fffbeb; border: 1px solid #fef3c7;">
+          <h5 class="fw-bold text-dark">Texto Argumentativo</h5>
+          <p class="mb-0 text-muted small">
+            Defiende una opinión o tesis mediante razones y argumentos para convencer al lector.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 2: CONTENIDO (Se muestra solo al presionar 'Contenido') -->
+<div id="sec-contenido" class="tab-content">
+  
+  <!-- Selector de tipos de texto -->
+  <div class="card margin-bottom">
+    <h3 class="tipo-texto">Selecciona un tipo de texto para aprender más</h3>
+    <div class="topics-grid">
+      <button class="topic-btn active" data-topic="narrativo" onclick="cargarTema('narrativo')">Narrativo</button>
+      <button class="topic-btn" data-topic="descriptivo" onclick="cargarTema('descriptivo')">Descriptivo</button>
+      <button class="topic-btn" data-topic="expositivo" onclick="cargarTema('expositivo')">Expositivo</button>
+      <button class="topic-btn" data-topic="argumentativo" onclick="cargarTema('argumentativo')">Argumentativo</button>
+    </div>
+  </div>
+
+  <!-- Detalle dinámico del tema seleccionado -->
+  <div class="card">
+    <h2 id="titulo-tema">Texto Narrativo</h2>
+    <p id="desc-tema">Cuenta una historia con personajes, acciones y acontecimientos en un tiempo y lugar determinados.</p>
+
+    <h4 class="mt-3">Características principales:</h4>
+    <ul id="lista-caracteristicas" class="features-list">
+      <li>Tiene personajes (protagonistas, antagonistas)</li>
+      <li>Se desarrolla en un tiempo y lugar específicos</li>
+      <li>Presenta una secuencia de acontecimientos (inicio, desarrollo, desenlace)</li>
+      <li>Utiliza verbos de acción</li>
+      <li>Puede estar en primera o tercera persona</li>
+    </ul>
+
+    <h4 class="mt-3">Ejemplo:</h4>
+    <div id="caja-ejemplo" class="example-box narrativo">
+      "Había una vez un valiente caballero que vivía en un castillo..."
+    </div>
+  </div>
+
+</div>
+
+<!-- SECCIÓN 3: ACTIVIDADES -->
+<div id="sec-actividades" class="tab-content d-none">
+  <div class="card-actividades">
+    <h2>Actividades Prácticas</h2>
+    <p class="subtitle">Resuelve los siguientes ejercicios sobre tipos de texto.</p>
+
+    <form id="form-actividades">
+      
+      <!-- Pregunta 1 -->
+      <div class="question-card" id="q1-box">
+        <p class="question-text">
+          <strong>1. Lee el siguiente texto:</strong> "María era una niña curiosa de ojos brillantes y cabello castaño. Le encantaba leer bajo el viejo roble del jardín." <strong>¿Qué tipo de texto es?</strong>
+        </p>
+        <div class="options-group">
+          <label class="option-item"><input type="radio" name="q1" value="Narrativo"> Narrativo</label>
+          <label class="option-item"><input type="radio" name="q1" value="Descriptivo"> Descriptivo</label>
+          <label class="option-item"><input type="radio" name="q1" value="Expositivo"> Expositivo</label>
+          <label class="option-item"><input type="radio" name="q1" value="Argumentativo"> Argumentativo</label>
+        </div>
+        <div class="feedback-msg" id="feedback-q1"></div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question-card" id="q2-box">
+        <p class="question-text">
+          <strong>2. Identifica el tipo:</strong> "Todos deberíamos usar transporte público porque reduce la contaminación y el tráfico en las ciudades."
+        </p>
+        <div class="options-group">
+          <label class="option-item"><input type="radio" name="q2" value="Narrativo"> Narrativo</label>
+          <label class="option-item"><input type="radio" name="q2" value="Descriptivo"> Descriptivo</label>
+          <label class="option-item"><input type="radio" name="q2" value="Expositivo"> Expositivo</label>
+          <label class="option-item"><input type="radio" name="q2" value="Argumentativo"> Argumentativo</label>
+        </div>
+        <div class="feedback-msg" id="feedback-q2"></div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="question-card" id="q3-box">
+        <p class="question-text">
+          <strong>3. ¿Cuál es un texto expositivo?</strong>
+        </p>
+        <div class="options-group">
+          <label class="option-item"><input type="radio" name="q3" value="receta"> Una receta de cocina</label>
+          <label class="option-item"><input type="radio" name="q3" value="cuento"> Un cuento de hadas</label>
+          <label class="option-item"><input type="radio" name="q3" value="enciclopedia"> Un artículo de enciclopedia sobre el agua</label>
+          <label class="option-item"><input type="radio" name="q3" value="carta"> Una carta personal</label>
+        </div>
+        <div class="feedback-msg" id="feedback-q3"></div>
+      </div>
+
+      <!-- Botón Enviar -->
+      <button type="button" class="btn-submit" onclick="evaluarActividades()">Enviar Respuestas</button>
+    </form>
+    
+    <!-- Resumen de resultado global -->
+    <div id="resultado-global" class="result-summary d-none"></div>
+  </div>
+</div>
+
+
+<!-- SECCIÓN 4: EVALUACIÓN -->
+<div id="sec-evaluacion" class="tab-content d-none">
+  <div class="eval-card-container">
+    
+    <!-- Encabezado con estado del juego -->
+   <div class="stats-badge">
+  <span class="badge-item">⏱️ Tiempo: <strong id="timer-val">15</strong>s</span>
+  <span class="badge-item">⭐ Puntos: <strong id="score-val">0</strong></span>
+  <span class="badge-item">🎯 Pregunta: <strong id="q-num">1</strong>/4</span>
+</div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-bar-bg">
+      <div id="progress-fill" class="progress-bar-fill" style="width: 25%;"></div>
+    </div>
+
+    <!-- Tarjeta del Desafío (Interactive Flashcard) -->
+    <div id="eval-game-box" class="quiz-card">
+      <div class="card-badge" id="card-tag">Desafío #1</div>
+      <p class="card-question" id="eval-question-text">
+        ¿Que tipo de texto e?
+      </p>
+
+      <div class="game-options" id="eval-options">
+        <!-- Las opciones se generan dinámicamente con JS -->
+      </div>
+
+      <div id="eval-feedback" class="feedback-banner d-none"></div>
+
+      <button id="btn-next-q" class="btn-next d-none" onclick="siguientePregunta()">
+        Siguiente Desafío ➜
+      </button>
+    </div>
+
+    <!-- Pantalla de Resultado Final (Oculta al inicio) -->
+    <div id="eval-results-screen" class="results-card d-none">
+      <div class="trophy-icon">🏆</div>
+      <h2>¡Evaluación Completada!</h2>
+      <p id="final-score-text">Obtuviste 0 de 400 puntos posibles.</p>
+      <div id="final-message" class="final-msg-box"></div>
+      
+      <button class="btn-retry" onclick="reiniciarEvaluacion()">
+        🔄 Volver a Intentar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // 1. Datos para cada tipo de texto
+  const temasData = {
+    narrativo: {
+      titulo: "Texto Narrativo",
+      descripcion: "Cuenta una historia con personajes, acciones y acontecimientos en un tiempo y lugar determinados.",
+      caracteristicas: [
+        "Tiene personajes (protagonistas, antagonistas)",
+        "Se desarrolla en un tiempo y lugar específicos",
+        "Presenta una secuencia de acontecimientos (inicio, desarrollo, desenlace)",
+        "Utiliza verbos de acción",
+        "Puede estar en primera o tercera persona"
+      ],
+      ejemplo: '"Había una vez un valiente caballero que vivía en un castillo. Un día, decidió emprender un viaje para rescatar a la princesa que había sido secuestrada por un dragón. Después de muchas aventuras, logró vencer al dragón y rescatar a la princesa."'
+    },
+    descriptivo: {
+      titulo: "Texto Descriptivo",
+      descripcion: "Representa personas, objetos, lugares o situaciones mediante palabras, detallando sus características.",
+      caracteristicas: [
+        "Usa abundantes adjetivos calificativos",
+        "Presenta detalles sensoriales (vista, oído, tacto, olfato, gusto)",
+        "Puede ser objetiva (técnica) o subjetiva (literaria)",
+        "Utiliza comparaciones y metáforas",
+        "No presenta acción, sino características"
+      ],
+      ejemplo: '"El jardín era un espacio amplio y colorido. Las rosas rojas perfumaban el ambiente con su aroma dulce, mientras que las margaritas blancas se mecían suavemente con la brisa. El césped verde brillante cubría el suelo como una alfombra natural."'
+    },
+    expositivo: {
+      titulo: "Texto Expositivo",
+      descripcion: "Explica o informa sobre un tema de manera objetiva y clara, transmitiendo conocimientos.",
+      caracteristicas: [
+        "Presenta información de manera objetiva",
+        "Utiliza un lenguaje claro y preciso",
+        "Incluye definiciones, ejemplos y datos",
+        "Sigue una estructura lógica",
+        "Común en textos académicos y científicos"
+      ],
+      ejemplo: '"El agua es un compuesto químico formado por dos átomos de hidrógeno y uno de oxígeno (H2O). Es esencial para la vida en la Tierra y se puede encontrar en tres estados: sólido, líquido y gaseoso."'
+    },
+    argumentativo: {
+      titulo: "Texto Argumentativo",
+      descripcion: "Busca convencer o persuadir al lector sobre una postura determinada mediante razones y justificaciones.",
+      caracteristicas: [
+        "Presenta una tesis o idea principal a defender",
+        "Utiliza argumentos lógicos, ejemplos o citas de autoridad",
+        "Busca persuadir o generar debate en la audiencia",
+        "Estructura típica: Introducción, Tesis, Argumentación y Conclusión"
+      ],
+      ejemplo: '"Es fundamental reducir el uso de plásticos de un solo uso. La contaminación marina afecta a miles de especies cada año y la acumulación de residuos amenaza la salud de los ecosistemas globales."'
+    }
+  };
+
+  // 2. Función para cambiar de pestaña superior (Introducción, Contenido, etc.)
+  function cambiarPestana(pestanaNombre, boton) {
+    // Ocultar todas las secciones
+    document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('d-none'));
+    
+    // Desmarcar todos los botones de pestañas
+    document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
+
+    // Mostrar la sección correspondiente
+    document.getElementById('sec-' + pestanaNombre).classList.remove('d-none');
+    
+    // Activar el botón presionado
+    boton.classList.add('active');
+  }
+
+  // 3. Función para cambiar entre Narrativo, Descriptivo, Expositivo, Argumentativo
+  function cargarTema(key) {
+    const data = temasData[key];
+    if (!data) return;
+
+    // Cambiar títulos y descripción
+    document.getElementById('titulo-tema').innerText = data.titulo;
+    document.getElementById('desc-tema').innerText = data.descripcion;
+
+    // Generar la lista de características
+    const ul = document.getElementById('lista-caracteristicas');
+    ul.innerHTML = '';
+    data.caracteristicas.forEach(item => {
+      const li = document.createElement('li');
+      li.innerText = item;
+      ul.appendChild(li);
+    });
+
+    // Actualizar el contenido y la clase de estilo del ejemplo
+    const caja = document.getElementById('caja-ejemplo');
+    caja.innerText = data.ejemplo;
+    caja.className = `example-box ${key}`;
+
+    // Marcar activo el botón correspondiente del submenú
+    document.querySelectorAll('.topic-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.topic === key);
+    });
+  }
+</script>
+<!--Respuestas para las actividades de unidad 1-->
+<script>
+    // Respuestas correctas
+const respuestasCorrectas = {
+  q1: "Descriptivo",
+  q2: "Argumentativo",
+  q3: "enciclopedia"
+};
+
+function evaluarActividades() {
+  const form = document.getElementById('form-actividades');
+  let puntaje = 0;
+  let total = 3;
+  let guardadoData = {};
+
+  for (let key in respuestasCorrectas) {
+    const seleccion = form.elements[key].value;
+    const box = document.getElementById(`${key}-box`);
+    const feedback = document.getElementById(`feedback-${key}`);
+
+    // Limpiar clases previas
+    box.classList.remove('correct', 'incorrect');
+    feedback.classList.remove('correct-text', 'incorrect-text');
+
+    if (!seleccion) {
+      feedback.innerText = '⚠️ Por favor, selecciona una opción.';
+      feedback.className = 'feedback-msg incorrect-text';
+      continue;
+    }
+
+    guardadoData[key] = seleccion; // Guardar valor para localStorage
+
+    if (seleccion === respuestasCorrectas[key]) {
+      puntaje++;
+      box.classList.add('correct');
+      feedback.innerText = '¡Correcto! Excelente deducción. 🎉';
+      feedback.className = 'feedback-msg correct-text';
+    } else {
+      box.classList.add('incorrect');
+      feedback.innerText = 'Incorrecto. Revisa el tipo de texto e intentalo de nuevo.';
+      feedback.className = 'feedback-msg incorrect-text';
+    }
+  }
+
+  // Guardar datos y puntaje en localStorage
+  localStorage.setItem('unidad1_actividades', JSON.stringify({
+    respuestas: guardadoData,
+    puntaje: puntaje,
+    completado: true
+  }));
+
+  // Mostrar cartel de resumen
+  const resumen = document.getElementById('resultado-global');
+  resumen.classList.remove('d-none');
+  resumen.innerText = `Obtuviste ${puntaje} de ${total} respuestas correctas.`;
+}
+
+// Cargar respuestas guardadas al abrir la página
+window.addEventListener('DOMContentLoaded', () => {
+  const datosGuardados = localStorage.getItem('unidad1_actividades');
+  if (datosGuardados) {
+    const { respuestas } = JSON.parse(datosGuardados);
+    const form = document.getElementById('form-actividades');
+    
+    for (let key in respuestas) {
+      if (form.elements[key]) {
+        form.elements[key].value = respuestas[key];
+      }
+    }
+    // Auto evaluar para mostrar aciertos previos
+    evaluarActividades();
+  }
+});
+</script>
+<script>
+// Array de preguntas dinámicas con ejemplos
+const evaluacionPreguntas = [
+  {
+    tag: "Desafío #1",
+    pregunta: "Lee el siguiente fragmento: «El cielo estaba cubierto de nubes oscuras y un viento frío recorría las calles desiertas de la ciudad.» ¿Qué tipo de texto es?",
+    opciones: ["Narrativo", "Descriptivo", "Expositivo", "Argumentativo"],
+    correcta: 1 // Descriptivo
+  },
+  {
+    tag: "Desafío #2",
+    pregunta: "«Ayer por la tarde, Lucas encontró un mapa antiguo en el desván. Sin dudarlo, llamó a su hermana y comenzaron la búsqueda del tesoro.» ¿Qué tipo de texto es?",
+    opciones: ["Narrativo", "Descriptivo", "Expositivo", "Argumentativo"],
+    correcta: 0 // Narrativo
+  },
+  {
+    tag: "Desafío #3",
+    pregunta: "«La fotosíntesis es el proceso mediante el cual las plantas convierten la luz solar en energía química para su desarrollo.» ¿Qué tipo de texto es?",
+    opciones: ["Narrativo", "Descriptivo", "Expositivo", "Argumentativo"],
+    correcta: 2 // Expositivo
+  },
+  {
+    tag: "Desafío #4",
+    pregunta: "«Considero que el reciclaje debería ser obligatorio en todas las escuelas, ya que reduce drásticamente el impacto ambiental negativo.» ¿Qué tipo de texto es?",
+    opciones: ["Narrativo", "Descriptivo", "Expositivo", "Argumentativo"],
+    correcta: 3 // Argumentativo
+  }
+];
+
+let indicePreguntaActual = 0;
+let puntajeAcumulado = 0;
+let tiempoRestante = 1800; 
+let timerInterval = null;
+
+// ⏱️ TIEMPO EN SEGUNDOS (30 minutos = 30 * 60 = 1800 segundos)
+const TIEMPO_POR_PREGUNTA = 1800; 
+
+// Función auxiliar para pasar de segundos a formato "MM:SS" (ej: 29:59)
+function formatearTiempo(segundos) {
+  const min = Math.floor(segundos / 60);
+  const seg = segundos % 60;
+  return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+}
+
+function iniciarTimer() {
+  clearInterval(timerInterval);
+  tiempoRestante = TIEMPO_POR_PREGUNTA;
+  document.getElementById("timer-val").innerText = formatearTiempo(tiempoRestante);
+
+  timerInterval = setInterval(() => {
+    tiempoRestante--;
+    document.getElementById("timer-val").innerText = formatearTiempo(tiempoRestante);
+
+    if (tiempoRestante <= 0) {
+      clearInterval(timerInterval);
+      tiempoAgotado();
+    }
+  }, 1000);
+}
+
+function renderizarPregunta() {
+  const q = evaluacionPreguntas[indicePreguntaActual];
+  
+  document.getElementById("card-tag").innerText = q.tag;
+  document.getElementById("eval-question-text").innerText = q.pregunta;
+  document.getElementById("q-num").innerText = indicePreguntaActual + 1;
+  
+  // Actualizar barra de progreso
+  const porcentaje = ((indicePreguntaActual + 1) / evaluacionPreguntas.length) * 100;
+  document.getElementById("progress-fill").style.width = `${porcentaje}%`;
+
+  // Resetear estados visuales
+  const feedback = document.getElementById("eval-feedback");
+  feedback.className = "feedback-banner d-none";
+  document.getElementById("btn-next-q").classList.add("d-none");
+
+  // Renderizar opciones de los 4 tipos de texto
+  const container = document.getElementById("eval-options");
+  container.innerHTML = "";
+
+  q.opciones.forEach((opcion, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "game-opt-btn";
+    btn.innerText = opcion;
+    btn.onclick = () => seleccionarRespuesta(idx, q.correcta);
+    container.appendChild(btn);
+  });
+
+  // Arrancar la cuenta regresiva
+  iniciarTimer();
+}
+
+function seleccionarRespuesta(indiceSeleccionado, indiceCorrecto) {
+  clearInterval(timerInterval); // Detener el reloj
+
+  const botones = document.querySelectorAll(".game-opt-btn");
+  botones.forEach(btn => btn.disabled = true);
+
+  const feedback = document.getElementById("eval-feedback");
+  feedback.classList.remove("d-none");
+
+  if (indiceSeleccionado === indiceCorrecto) {
+    botones[indiceSeleccionado].classList.add("correct-opt");
+    
+    // Cálculo de puntos
+    const puntosGanados = 100;
+    puntajeAcumulado += puntosGanados;
+    document.getElementById("score-val").innerText = puntajeAcumulado;
+
+    feedback.innerText = `¡Correcto! 🎉 (+${puntosGanados} pts)`;
+    feedback.className = "feedback-banner success";
+  } else {
+    botones[indiceSeleccionado].classList.add("incorrect-opt");
+    botones[indiceCorrecto].classList.add("correct-opt");
+
+    feedback.innerText = "¡Incorrecto! Revisa las características de este tipo de texto.";
+    feedback.className = "feedback-banner error";
+  }
+
+  document.getElementById("btn-next-q").classList.remove("d-none");
+}
+
+function tiempoAgotado() {
+  const q = evaluacionPreguntas[indicePreguntaActual];
+  const botones = document.querySelectorAll(".game-opt-btn");
+  botones.forEach(btn => btn.disabled = true);
+
+  // Remarcar la respuesta correcta
+  botones[q.correcta].classList.add("correct-opt");
+
+  const feedback = document.getElementById("eval-feedback");
+  feedback.classList.remove("d-none");
+  feedback.innerText = "⏰ ¡Se acabó el tiempo de 30 minutos! No sumaste puntos en este desafío.";
+  feedback.className = "feedback-banner error";
+
+  document.getElementById("btn-next-q").classList.remove("d-none");
+}
+
+function siguientePregunta() {
+  indicePreguntaActual++;
+  if (indicePreguntaActual < evaluacionPreguntas.length) {
+    renderizarPregunta();
+  } else {
+    mostrarPantallaFinal();
+  }
+}
+
+function mostrarPantallaFinal() {
+  clearInterval(timerInterval);
+  document.getElementById("eval-game-box").classList.add("d-none");
+  const resultsScreen = document.getElementById("eval-results-screen");
+  resultsScreen.classList.remove("d-none");
+
+  document.getElementById("final-score-text").innerText = `Obtuviste un total de ${puntajeAcumulado} puntos.`;
+
+  const msgBox = document.getElementById("final-message");
+  if (puntajeAcumulado >= 400) {
+    msgBox.innerHTML = "<strong>¡Excelente trabajo! 🏆</strong> Dominás a la perfección todos los tipos de textos.";
+  } else if (puntajeAcumulado >= 200) {
+    msgBox.innerHTML = "<strong>¡Buen trabajo! 👍</strong> Tenés bien consolidados los conceptos principales.";
+  } else {
+    msgBox.innerHTML = "<strong>¡A seguir practicando! 💪</strong> Podés repasar la pestaña 'Contenido' e intentarlo otra vez.";
+  }
+}
+
+function reiniciarEvaluacion() {
+  indicePreguntaActual = 0;
+  puntajeAcumulado = 0;
+  document.getElementById("score-val").innerText = "0";
+  document.getElementById("eval-results-screen").classList.add("d-none");
+  document.getElementById("eval-game-box").classList.remove("d-none");
+  renderizarPregunta();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderizarPregunta();
+});
+</script>
+</body>
