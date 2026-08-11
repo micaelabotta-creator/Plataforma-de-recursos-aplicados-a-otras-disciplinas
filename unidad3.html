@@ -3,39 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de lengua</title>
+    <title>Plataforma de lengua - Unidad 3</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- FontAwesome para los íconos del menú (llave y usuario) -->
+    <!-- FontAwesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="estilos.css">
     <!-- Favicon / Ícono de la pestaña -->
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+      /* Estilos para alinear y mejorar la experiencia de usuario en las preguntas */
+      .question-card {
+        text-align: left !important;
+      }
+      
+      .option-label {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid #ced4da !important;
+        background-color: #f8f9fa;
+        margin-right: 8px;
+        margin-bottom: 0;
+      }
+
+      .option-label:hover {
+        background-color: #e2e8f0;
+        border-color: #cbd5e1 !important;
+      }
+
+      .option-label input[type="radio"] {
+        cursor: pointer;
+      }
+    </style>
 </head>
 
 <body>
- <!-- BARRA DE NAVEGACIÓN -->
-  <nav class="navbar">
-    <!-- Logo o Título -->
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <span>AprendoLiteratura</span>
-    </div>
+<!--MENU DE NAVEGACIÓN-->
+<nav class="navbar navbar-expand-lg bg-white py-3 shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- LOGO -->
+    <a class="navbar-brand font-weight-bold text-primary d-flex align-items-center" href="index.html">
+      <span class="mr-2" style="font-size: 1.5rem;">📖</span>
+      <span style="color: #17a2b8;">AprendoLiteratura</span>
+    </a>
 
-    <!-- Botón Hamburguesa (solo visible en celular) -->
-    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
-      ☰
+    <!-- BOTÓN HAMBURGUESA PARA CELULARES -->
+    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Enlaces del menú -->
-    <div class="nav-menu" id="nav-menu">
-      <a href="#">INICIO</a>
-      <a href="#seccion-contenidos">CONTENIDOS</a>
-      <a href="#seccion-ayuda">💡 AYUDA</a>
-      <a href="#" class="btn-yellow">REGÍSTRATE</a>
-      <a href="#" class="btn-blue">INICIAR SESIÓN</a>
+    <!-- MENÚ ALINEADO A LA DERECHA -->
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ml-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="index.html">INICIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="index.html#seccion-contenidos">CONTENIDOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="tutorial.html">💡 AYUDA</a>
+        </li>
+
+        <!-- BOTONES DE AUTENTICACIÓN (Se ocultan al iniciar sesión) -->
+        <li class="nav-item ml-lg-2" id="item-btn-registro">
+          <button class="btn btn-warning text-white rounded-pill font-weight-bold px-4 py-2" data-toggle="modal" data-target="#authModal" onclick="abrirAuthModal('registro')">
+            🔑 REGÍSTRATE
+          </button>
+        </li>
+        <li class="nav-item ml-lg-2 mt-2 mt-lg-0" id="item-btn-login">
+          <button class="btn text-white rounded-pill font-weight-bold px-4 py-2" style="background-color: #17a2b8;" data-toggle="modal" data-target="#authModal" onclick="abrirAuthModal('login')">
+            👨‍🎓 INICIAR SESIÓN
+          </button>
+        </li>
+
+        <!-- CONTENEDOR DE PERFIL (Se muestra al iniciar sesión) -->
+        <li class="nav-item ml-lg-3 d-none align-items-center gap-2" id="user-profile-menu">
+          <img id="nav-user-photo" src="https://via.placeholder.com/40" alt="Foto de perfil" class="rounded-circle border mr-2" style="width: 40px; height: 40px; object-fit: cover;">
+          <span id="nav-user-name" class="font-weight-bold text-dark mr-2">Usuario</span>
+          <button onclick="cerrarSesion()" class="btn btn-outline-danger btn-sm rounded-pill">Cerrar Sesión</button>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+<!--CIERRE DE MENU DE NAVEGACIÓN-->
 
   <!-- CONTENEDOR PRINCIPAL -->
   <div class="main-card container mt-4">
@@ -51,7 +103,7 @@
         </div>
     </div>
    
- <!-- CONTENEDOR PRINCIPAL -->
+<!-- CONTENEDOR PRINCIPAL -->
 <div class="card-container">
 
   <!-- PESTAÑAS PRINCIPALES -->
@@ -152,7 +204,7 @@
       </div>
     </div>
 
-    <!-- CONTENIDO TEMA 2: C/S/Z (Acá vas agregando el contenido de los otros temas) -->
+    <!-- CONTENIDO TEMA 2: C/S/Z -->
     <div id="tema-csz" class="tema-contenido" style="display: none;">
       <div class="rule-content-card">
         <h2 class="title">Uso de C/S/Z</h2>
@@ -294,7 +346,6 @@
 </div>
 
     <!-- CONTENIDO TEMA 4: PUNTUACIÓN -->
-    <<!-- CONTENIDO TEMA 4: PUNTUACIÓN -->
 <div id="tema-puntuacion" class="tema-contenido" style="display: none;">
   <div class="rule-content-card">
     <h2 class="title">Signos de Puntuación</h2>
@@ -367,71 +418,236 @@
 
   </div>
 
-  <!-- OTRAS SECCIONES (Se muestran al cambiar de pestaña) -->
-  <div id="contenido" class="tab-pane" style="display: none;">
-    <h2>Contenido</h2>
-    <p>Aquí va el contenido explicativo...</p>
+  <!-- SECCIÓN 3: PRÁCTICA DE ORTOGRAFÍA -->
+  <div id="practica" class="tab-pane" style="display: none;">
+    <div class="card p-4 shadow-sm rounded border-0">
+      <h3 class="font-weight-bold mb-4" style="color: #1e293b;">Práctica de Ortografía</h3>
+      
+      <!-- Pregunta 1 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">1. Completa: "En_iar el paquete"</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p1" value="B" class="mr-2"> B
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p1" value="V" class="mr-2"> V
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">2. Completa: "Cele_ración de cumpleaños"</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p2" value="B" class="mr-2"> B
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p2" value="V" class="mr-2"> V
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">3. Completa: "Expre_ión artística"</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p3" value="S" class="mr-2"> S
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p3" value="C" class="mr-2"> C
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p3" value="Z" class="mr-2"> Z
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">4. ¿Cuál palabra está correctamente tildada?</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p4" value="Cafe" class="mr-2"> Cafe
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p4" value="Café" class="mr-2"> Café
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p4" value="Cafè" class="mr-2"> Cafè
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">5. ¿Qué signo falta? "Me preguntó [ ] Vas a venir [ ]"</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p5" value="¿?" class="mr-2"> ¿?
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p5" value="¡!" class="mr-2"> ¡!
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p5" value='""' class="mr-2"> ""
+          </label>
+        </div>
+      </div>
+
+      <!-- Pregunta 6 -->
+      <div class="question-card p-3 mb-3 border rounded text-left" style="background-color: #fff;">
+        <p class="mb-3 font-weight-bold text-left" style="color: #334155;">6. Completa: "El niño canta_a feliz"</p>
+        <div class="d-flex flex-wrap align-items-center justify-content-start">
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p6" value="B" class="mr-2"> B
+          </label>
+          <label class="btn option-label px-4 py-2 rounded d-flex align-items-center">
+            <input type="radio" name="p6" value="V" class="mr-2"> V
+          </label>
+        </div>
+      </div>
+
+      <!-- Botón de verificación -->
+      <button type="button" class="btn btn-secondary text-white font-weight-bold w-100 py-2 mt-3 btn-submit" style="border-radius: 8px;">
+        Verificar Respuestas
+      </button>
+    </div>
   </div>
 
-  <div id="actividades" class="tab-pane" style="display: none;">
-    <h2>Actividades</h2>
-    <p>Aquí van los ejercicios y actividades...</p>
+  <!-- SECCIÓN 4: EJERCICIOS -->
+  <div id="ejercicios" class="tab-pane" style="display: none;">
+    <h2>Ejercicios</h2>
+    <p>Aquí van los ejercicios interactivos de la unidad...</p>
   </div>
-
 
 </div>
 
+</div>
 
- <footer class="main-footer" style="text-align: center; color: #5a6b82; font-size: 14px; padding: 20px 10px;">
+<!-- VENTANA MODAL UNIFICADA (REGISTRO Y LOGIN) -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title font-weight-bold text-dark" id="modalTitulo">Autenticación</h5>
+        <button type="button" class="close" id="btn-close-modal" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body p-4">
+        
+        <!-- PASO 1: SELECCIÓN DE ROL (Solo para Registro) -->
+        <div id="step-role-selection">
+          <p class="text-secondary text-center mb-4">¿Cómo querés registrarte?</p>
+          <div class="d-grid gap-3 d-flex flex-column">
+            <button class="btn btn-outline-primary btn-lg font-weight-bold mb-2" onclick="mostrarFormularioRegistro('Estudiante')">
+              👨‍🎓 Soy Estudiante
+            </button>
+            <button class="btn btn-outline-success btn-lg font-weight-bold" onclick="mostrarFormularioRegistro('Docente')">
+              👩‍🏫 Soy Docente
+            </button>
+          </div>
+        </div>
+
+        <!-- PASO 2: FORMULARIO DE REGISTRO -->
+        <form id="form-registro" class="d-none" onsubmit="guardarRegistro(event)">
+          <div class="alert alert-info text-center py-2" id="badge-rol">Rol seleccionado: Estudiante</div>
+          
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Foto de Perfil</label>
+            <input type="file" id="reg-foto" class="form-control-file" accept="image/*">
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Nombre Completo</label>
+            <input type="text" id="reg-nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+          </div>
+          
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Correo Electrónico</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Contraseña</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+          </div>
+
+          <div class="mt-4">
+            <button type="submit" class="btn btn-success font-weight-bold btn-block">Completar Registro</button>
+            <button type="button" class="btn btn-link text-secondary text-decoration-none btn-block" onclick="abrirAuthModal('registro')">← Volver a elegir rol</button>
+          </div>
+        </form>
+
+        <!-- PASO 3: FORMULARIO DE INICIO DE SESIÓN -->
+        <form id="form-login" class="d-none" onsubmit="procesarLogin(event)">
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Correo Electrónico</label>
+            <input type="email" id="login-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="font-weight-bold">Contraseña</label>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <div class="mt-4">
+            <button type="submit" class="btn btn-info text-white font-weight-bold btn-block">Iniciar Sesión</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="main-footer" style="text-align: center; color: #5a6b82; font-size: 14px; padding: 20px 10px;">
   Plataforma Educativa de Lengua - Botta Micaela Florencia
 </footer>
 
-</html>
+<!-- DEPENDENCIAS DE BOOTSTRAP Y JQUERY -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<!--UNIDAD 3 PASO DE CADA BOTON DE SECCIONES EN LA UNIDAD-->
+<!-- SCRIPTS DE NAVEGACIÓN, EVALUACIÓN Y AUTENTICACIÓN -->
 <script>
+  // --- NAVEGACIÓN POR PESTAÑAS Y TEMAS ---
   function cambiarPestana(idPestana, elementoBoton) {
-  // 1. Quita la clase 'active' de todos los botones
-  const botones = document.querySelectorAll('.tab-item');
-  botones.forEach(btn => btn.classList.remove('active'));
+    const botones = document.querySelectorAll('.tab-item');
+    botones.forEach(btn => btn.classList.remove('active'));
 
-  // 2. Oculta todos los paneles de contenido
-  const paneles = document.querySelectorAll('.tab-pane');
-  paneles.forEach(panel => {
-    panel.style.display = 'none';
-    panel.classList.remove('active');
-  });
+    const paneles = document.querySelectorAll('.tab-pane');
+    paneles.forEach(panel => {
+      panel.style.display = 'none';
+      panel.classList.remove('active');
+    });
 
-  // 3. Activa el botón clickeado
-  elementoBoton.classList.add('active');
+    elementoBoton.classList.add('active');
 
-  // 4. Muestra la sección elegida
-  const panelObjetivo = document.getElementById(idPestana);
-  if (panelObjetivo) {
-    panelObjetivo.style.display = 'block';
-    panelObjetivo.classList.add('active');
+    const panelObjetivo = document.getElementById(idPestana);
+    if (panelObjetivo) {
+      panelObjetivo.style.display = 'block';
+      panelObjetivo.classList.add('active');
+    }
   }
-}
-</script>
-<script>
-<!--reglas-->
-function cambiarTema(idTema, elementoBoton) {
-  // 1. Ocultar todos los temas
-  const temas = document.querySelectorAll('.tema-contenido');
-  temas.forEach(tema => tema.style.display = 'none');
 
-  // 2. Quitar la clase active de los botones de tema
-  const botones = document.querySelectorAll('.subtab-btn');
-  botones.forEach(btn => btn.classList.remove('active'));
+  function cambiarTema(idTema, elementoBoton) {
+    const temas = document.querySelectorAll('.tema-contenido');
+    temas.forEach(tema => tema.style.display = 'none');
 
-  // 3. Mostrar el tema elegido y activar su botón
-  document.getElementById('tema-' + idTema).style.display = 'block';
-  elementoBoton.classList.add('active');
-}
-</script>
+    const botones = document.querySelectorAll('.subtab-btn');
+    botones.forEach(btn => btn.classList.remove('active'));
 
-<script>
-  // Respuestas correctas para cada pregunta (coincide con los values de los inputs)
+    document.getElementById('tema-' + idTema).style.display = 'block';
+    elementoBoton.classList.add('active');
+  }
+
+  // --- LÓGICA DE EVALUACIÓN DE PRÁCTICA ---
   const respuestasCorrectas = {
     p1: "V",    // EnViar
     p2: "B",    // CeleBración
@@ -441,40 +657,156 @@ function cambiarTema(idTema, elementoBoton) {
     p6: "B"     // cantaBa
   };
 
-  document.querySelector('.btn-submit').addEventListener('click', function () {
-    let aciertos = 0;
-    const totalPreguntas = Object.keys(respuestasCorrectas).length;
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('btn-submit')) {
+      let aciertos = 0;
+      const totalPreguntas = Object.keys(respuestasCorrectas).length;
 
-    // Recorremos cada pregunta
-    for (const [pregunta, respuestaCorrecta] of Object.entries(respuestasCorrectas)) {
-      // Buscamos la opción seleccionada para esa pregunta
-      const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
-      
-      // Buscamos la tarjeta contenedora de esta pregunta para aplicarle feedback visual
-      const tarjeta = document.querySelector(`input[name="${pregunta}"]`)?.closest('.question-card');
+      for (const [pregunta, respuestaCorrecta] of Object.entries(respuestasCorrectas)) {
+        const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+        const tarjeta = document.querySelector(`input[name="${pregunta}"]`)?.closest('.question-card');
 
-      if (!tarjeta) continue;
+        if (!tarjeta) continue;
 
-      if (!seleccionada) {
-        // No respondió la pregunta
-        tarjeta.style.border = '1.5px solid #f59e0b'; // Borde amarillo/naranja
-        tarjeta.style.backgroundColor = '#fffbeb';
-      } else if (seleccionada.value === respuestaCorrecta) {
-        // Respuesta Correcta
-        aciertos++;
-        tarjeta.style.border = '1.5px solid #10b981'; // Borde verde
-        tarjeta.style.backgroundColor = '#ecfdf5';
-      } else {
-        // Respuesta Incorrecta
-        tarjeta.style.border = '1.5px solid #ef4444'; // Borde rojo
-        tarjeta.style.backgroundColor = '#fef2f2';
+        if (!seleccionada) {
+          tarjeta.style.border = '1.5px solid #f59e0b';
+          tarjeta.style.backgroundColor = '#fffbeb';
+        } else if (seleccionada.value === respuestaCorrecta) {
+          aciertos++;
+          tarjeta.style.border = '1.5px solid #10b981';
+          tarjeta.style.backgroundColor = '#ecfdf5';
+        } else {
+          tarjeta.style.border = '1.5px solid #ef4444';
+          tarjeta.style.backgroundColor = '#fef2f2';
+        }
       }
+
+      setTimeout(() => {
+        alert(`Obtuviste ${aciertos} de ${totalPreguntas} respuestas correctas.`);
+      }, 100);
+    }
+  });
+
+  // --- LÓGICA DE REGISTRO E INICIO DE SESIÓN ---
+  let rolSeleccionado = '';
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const usuarioActivo = JSON.parse(localStorage.getItem('sesion_activa'));
+    if (usuarioActivo) {
+      renderizarPerfilNavbar(usuarioActivo);
+    }
+  });
+
+  function abrirAuthModal(modo) {
+    const titulo = document.getElementById('modalTitulo');
+    const stepRole = document.getElementById('step-role-selection');
+    const formRegistro = document.getElementById('form-registro');
+    const formLogin = document.getElementById('form-login');
+
+    if (modo === 'registro') {
+      titulo.innerText = "Crear Cuenta Nueva";
+      stepRole.classList.remove('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.add('d-none');
+    } else {
+      titulo.innerText = "Iniciar Sesión";
+      stepRole.classList.add('d-none');
+      formRegistro.classList.add('d-none');
+      formLogin.classList.remove('d-none');
+    }
+  }
+
+  function mostrarFormularioRegistro(rol) {
+    rolSeleccionado = rol;
+    document.getElementById('modalTitulo').innerText = `Registro de ${rol}`;
+    document.getElementById('badge-rol').innerText = `Perfil seleccionado: ${rol}`;
+    document.getElementById('step-role-selection').classList.add('d-none');
+    document.getElementById('form-registro').classList.remove('d-none');
+  }
+
+  function guardarRegistro(event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById('reg-foto');
+    const file = fileInput.files[0];
+
+    let fotoBase64 = "https://ui-avatars.com/api/?name=" + encodeURIComponent(document.getElementById('reg-nombre').value);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        fotoBase64 = e.target.result;
+        completarGuardado(fotoBase64);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      completarGuardado(fotoBase64);
+    }
+  }
+
+  function completarGuardado(fotoUrl) {
+    const usuario = {
+      nombre: document.getElementById('reg-nombre').value,
+      email: document.getElementById('reg-email').value,
+      password: document.getElementById('reg-password').value,
+      rol: rolSeleccionado,
+      foto: fotoUrl
+    };
+
+    localStorage.setItem(usuario.email, JSON.stringify(usuario));
+    alert(`¡Cuenta de ${usuario.rol} creada con éxito! Ahora podés iniciar sesión.`);
+
+    document.getElementById('form-registro').reset();
+    abrirAuthModal('login');
+  }
+
+  function procesarLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    const usuarioGuardado = localStorage.getItem(email);
+
+    if (!usuarioGuardado) {
+      alert("El correo ingresado no está registrado.");
+      return;
     }
 
-    // Mostrar alerta simple con la nota/resultado
-    setTimeout(() => {
-      alert(`Obtuviste ${aciertos} de ${totalPreguntas} respuestas correctas.`);
-    }, 100);
-  });
+    const usuario = JSON.parse(usuarioGuardado);
+
+    if (usuario.password === password) {
+      localStorage.setItem('sesion_activa', JSON.stringify(usuario));
+      renderizarPerfilNavbar(usuario);
+      document.getElementById('form-login').reset();
+
+      // Cerrar modal compatible con Bootstrap 4
+      $('#authModal').modal('hide');
+    } else {
+      alert("Contraseña incorrecta. Intentalo de nuevo.");
+    }
+  }
+
+  function renderizarPerfilNavbar(usuario) {
+    document.getElementById('item-btn-registro').classList.add('d-none');
+    document.getElementById('item-btn-login').classList.add('d-none');
+    
+    const profileMenu = document.getElementById('user-profile-menu');
+    profileMenu.classList.remove('d-none');
+    profileMenu.classList.add('d-flex');
+
+    document.getElementById('nav-user-photo').src = usuario.foto;
+    document.getElementById('nav-user-name').innerText = usuario.nombre;
+  }
+
+  function cerrarSesion() {
+    localStorage.removeItem('sesion_activa');
+    document.getElementById('user-profile-menu').classList.add('d-none');
+    document.getElementById('user-profile-menu').classList.remove('d-flex');
+    document.getElementById('item-btn-registro').classList.remove('d-none');
+    document.getElementById('item-btn-login').classList.remove('d-none');
+  }
 </script>
+
 </body>
+</html>

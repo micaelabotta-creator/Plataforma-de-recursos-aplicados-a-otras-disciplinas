@@ -1,65 +1,152 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de lengua</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="estilos.css">
-    <!-- Favicon / Ícono de la pestaña -->
-  <link rel="icon" type="image/png" href="logo.png">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma de Lengua - Unidad 2</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  
+  <!-- FontAwesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="estilos.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    /* Estilos complementarios para componentes interactivos */
+    .tab-item {
+      background: transparent;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      color: #64748b;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+    }
+    .tab-item.active {
+      color: #0d6efd;
+      border-bottom-color: #0d6efd;
+    }
+    .palabra-chip {
+      display: inline-block;
+      padding: 6px 16px;
+      background-color: #e2e8f0;
+      color: #1e293b;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: grab;
+      user-select: none;
+    }
+    .palabra-chip.correcto {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
+    .palabra-chip.incorrecto {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    .caja-drop {
+      background-color: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      min-height: 100px;
+    }
+    .opcion-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .opcion-card:hover {
+      background-color: #f8fafc;
+    }
+    .badge-ref {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .ref-correcto { background-color: #d1e7dd; }
+    .ref-incorrecto { background-color: #f8d7da; }
+    .btn-verificar {
+      background-color: #0f172a;
+      color: white;
+    }
+    .btn-verificar:hover {
+      background-color: #1e293b;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <<!-- BARRA DE NAVEGACIÓN -->
-  <nav class="navbar">
-    <!-- Logo o Título -->
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <span>AprendoLiteratura</span>
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <div class="logo d-flex align-items-center">
+      <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+      <span class="fw-bold">AprendoLiteratura</span>
     </div>
 
-    <!-- Botón Hamburguesa (solo visible en celular) -->
-    <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir menú">
+    <button class="hamburger-btn d-lg-none border-0 bg-transparent fs-3 ms-auto" id="hamburger-btn" aria-label="Abrir menú">
       ☰
     </button>
 
-    <!-- Enlaces del menú -->
-    <div class="nav-menu" id="nav-menu">
-      <a href="#">INICIO</a>
-      <a href="#seccion-contenidos">CONTENIDOS</a>
-      <a href="#seccion-ayuda">💡 AYUDA</a>
-      <a href="#" class="btn-yellow">REGÍSTRATE</a>
-      <a href="#" class="btn-blue">INICIAR SESIÓN</a>
+    <div class="nav-menu ms-auto d-flex align-items-center gap-3" id="nav-menu">
+      <a href="index.html" class="nav-link">INICIO</a>
+      <a href="#seccion-contenidos" class="nav-link">CONTENIDOS</a>
+      <a href="tutorial.html" class="nav-link">💡 AYUDA</a>
+      
+      <!-- BOTONES ESTÁNDAR -->
+      <div id="auth-buttons" class="d-inline-flex gap-2">
+        <a href="#" class="btn btn-warning text-white fw-semibold px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#authModal" onclick="abrirAuthModal('registro')">
+          🔑 REGÍSTRATE
+        </a>
+        <a href="#" class="btn btn-info text-white fw-semibold px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#authModal" onclick="abrirAuthModal('login')">
+          👨‍🎓 INICIAR SESIÓN
+        </a>
+      </div>
+
+      <!-- CONTENEDOR DE PERFIL -->
+      <div id="user-profile-menu" class="d-none align-items-center gap-2">
+        <img id="nav-user-photo" src="https://via.placeholder.com/40" alt="Foto de perfil" class="rounded-circle border" style="width: 40px; height: 40px; object-fit: cover;">
+        <span id="nav-user-name" class="fw-bold text-dark">Usuario</span>
+        <button onclick="cerrarSesion()" class="btn btn-outline-danger btn-sm rounded-pill ms-2">Cerrar Sesión</button>
+      </div>
     </div>
   </nav>
 
-  <!-- CONTENEDOR PRINCIPAL -->
+  <!-- CONTENEDOR PRINCIPAL DE CONTENIDOS -->
   <div class="main-card container mt-4">
-    <a href="index.html" class="back-link">
-        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    <a href="index.html" class="back-link text-decoration-none text-secondary">
+      <i class="fa-solid fa-arrow-left"></i> Volver al inicio
     </a>
 
-    <div class="unit-header my-3">
-        <i class="fa-solid fa-book-open unit-icon"></i>
-        <div class="unit-titles">
-            <h2>Unidad 2: Clases de Palabras</h2>
-            <p>Domina los sustantivos, adjetivos, verbos, adverbios y pronombres</p>
-        </div>
-    </div>>
+    <div class="unit-header my-3 d-flex align-items-center gap-3">
+      <i class="fa-solid fa-book-open unit-icon fs-1 text-primary"></i>
+      <div class="unit-titles">
+        <h2>Unidad 2: Clases de Palabras</h2>
+        <p class="text-muted mb-0">Domina los sustantivos, adjetivos, verbos, adverbios y pronombres</p>
+      </div>
+    </div>
 
     <!-- PESTAÑAS PRINCIPALES -->
-    <div class="tabs-bar mb-4">
-      <button class="tab-item" onclick="cambiarPestana('introduccion', this)">Introducción</button>
-      <button class="tab-item active" onclick="cambiarPestana('contenido', this)">Contenido</button>
+    <div class="tabs-bar mb-4 border-bottom">
+      <button class="tab-item active" onclick="cambiarPestana('introduccion', this)">Introducción</button>
+      <button class="tab-item" onclick="cambiarPestana('contenido', this)">Contenido</button>
       <button class="tab-item" onclick="cambiarPestana('actividades', this)">Actividades</button>
       <button class="tab-item" onclick="cambiarPestana('practica', this)">Práctica interactiva</button>
     </div>
 
     <!-- SECCIÓN 1: INTRODUCCIÓN -->
-    <div id="sec-introduccion" class="tab-content d-none">
-      <div class="card p-4">
+    <div id="sec-introduccion" class="tab-content">
+      <div class="card p-4 border-0 shadow-sm rounded-4">
         <h2 class="fw-bold mb-3">¿Qué son las clases de palabras?</h2>
         <p class="text-secondary mb-4">
           Las palabras se clasifican según su función en la oración y su significado. Cada clase de palabra tiene un papel específico que ayuda a construir oraciones claras y correctas.
@@ -146,486 +233,493 @@
     </div>
 
     <!-- SECCIÓN 2: CONTENIDO -->
-    <div id="sec-contenido" class="tab-content">
-      
-      <!-- Selector de Clases de Palabras -->
+    <div id="sec-contenido" class="tab-content d-none">
       <div class="card mb-4 p-4 shadow-sm border-0 rounded-4">
         <h4 class="fw-bold mb-3" style="color: #0f172a; font-size: 18px;">Selecciona una clase de palabra</h4>
         
         <div class="row g-2 justify-content-center">
-          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn active" data-topic="sustantivos" onclick="cargarTema('sustantivos')">Sustantivos</button></div>
-          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="adjetivos" onclick="cargarTema('adjetivos')">Adjetivos</button></div>
-          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="verbos" onclick="cargarTema('verbos')">Verbos</button></div>
-          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="adverbios" onclick="cargarTema('adverbios')">Adverbios</button></div>
-          <div class="col"><button class="btn btn-light w-100 py-3 fw-semibold topic-btn" data-topic="pronombres" onclick="cargarTema('pronombres')">Pronombres</button></div>
+          <div class="col-md-2 col-6"><button class="btn btn-outline-primary w-100 py-2 fw-semibold topic-btn active" onclick="cargarTema('sustantivos', this)">Sustantivos</button></div>
+          <div class="col-md-2 col-6"><button class="btn btn-outline-primary w-100 py-2 fw-semibold topic-btn" onclick="cargarTema('adjetivos', this)">Adjetivos</button></div>
+          <div class="col-md-2 col-6"><button class="btn btn-outline-primary w-100 py-2 fw-semibold topic-btn" onclick="cargarTema('verbos', this)">Verbos</button></div>
+          <div class="col-md-2 col-6"><button class="btn btn-outline-primary w-100 py-2 fw-semibold topic-btn" onclick="cargarTema('adverbios', this)">Adverbios</button></div>
+          <div class="col-md-2 col-6"><button class="btn btn-outline-primary w-100 py-2 fw-semibold topic-btn" onclick="cargarTema('pronombres', this)">Pronombres</button></div>
         </div>
       </div>
 
-      <!-- Detalle del Tema Seleccionado (Se llena dinámicamente con JS) -->
+      <!-- Detalle del Tema Seleccionado -->
       <div class="card p-4 shadow-sm border-0 rounded-4" id="contenedor-detalle-tema">
-        <!-- JS inyectará la tarjeta aquí -->
+        <!-- JS inyectará el contenido aquí -->
       </div>
-
     </div>
 
     <!-- SECCIÓN 3: ACTIVIDADES -->
-   <!-- SECCIÓN 3: ACTIVIDADES -->
-<div id="sec-actividades" class="tab-content d-none">
-  <div class="card p-4 shadow-sm border-0 rounded-4">
-    
-    <h3 class="fw-bold mb-4" style="color: #0f172a; font-size: 20px;">Actividades de Identificación</h3>
+    <div id="sec-actividades" class="tab-content d-none">
+      <div class="card p-4 shadow-sm border-0 rounded-4">
+        <h3 class="fw-bold mb-4" style="color: #0f172a; font-size: 20px;">Actividades de Identificación</h3>
 
-    <form id="form-actividades-u2">
-      
-      <!-- Pregunta 1 -->
-      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q1-card">
-        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
-          1. Identifica el <strong>SUSTANTIVO</strong> en la siguiente oración: "El gato negro duerme en el sofá cómodo."
-        </p>
-        <div class="row g-3">
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="negro"> <span>negro</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="gato"> <span>gato</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="duerme"> <span>duerme</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="cómodo"> <span>cómodo</span></label></div>
-        </div>
-        <div class="feedback-msg mt-2" id="feedback-q1"></div>
-      </div>
+        <form id="form-actividades-u2">
+          <!-- Pregunta 1 -->
+          <div class="card p-4 mb-4 border rounded-3 bg-white" id="q1-card">
+            <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+              1. Identifica el <strong>SUSTANTIVO</strong> en la siguiente oración: "El gato negro duerme en el sofá cómodo."
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="negro"> <span>negro</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="gato"> <span>gato</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="duerme"> <span>duerme</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q1" value="cómodo"> <span>cómodo</span></label></div>
+            </div>
+            <div class="feedback-msg mt-2" id="feedback-q1"></div>
+          </div>
 
-      <!-- Pregunta 2 -->
-      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q2-card">
-        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
-          2. ¿Cuál es el <strong>ADJETIVO</strong> en: "Mi hermana pequeña juega en el parque grande"?
-        </p>
-        <div class="row g-3">
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="hermana"> <span>hermana</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="pequeña"> <span>pequeña</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="juega"> <span>juega</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="parque"> <span>parque</span></label></div>
-        </div>
-        <div class="feedback-msg mt-2" id="feedback-q2"></div>
-      </div>
+          <!-- Pregunta 2 -->
+          <div class="card p-4 mb-4 border rounded-3 bg-white" id="q2-card">
+            <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+              2. ¿Cuál es el <strong>ADJETIVO</strong> en: "Mi hermana pequeña juega en el parque grande"?
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="hermana"> <span>hermana</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="pequeña"> <span>pequeña</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="juega"> <span>juega</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q2" value="parque"> <span>parque</span></label></div>
+            </div>
+            <div class="feedback-msg mt-2" id="feedback-q2"></div>
+          </div>
 
-      <!-- Pregunta 3 -->
-      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q3-card">
-        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
-          3. Encuentra el <strong>VERBO</strong>: "Los estudiantes escriben sus tareas rápidamente."
-        </p>
-        <div class="row g-3">
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="estudiantes"> <span>estudiantes</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="escriben"> <span>escriben</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="tareas"> <span>tareas</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="rápidamente"> <span>rápidamente</span></label></div>
-        </div>
-        <div class="feedback-msg mt-2" id="feedback-q3"></div>
-      </div>
+          <!-- Pregunta 3 -->
+          <div class="card p-4 mb-4 border rounded-3 bg-white" id="q3-card">
+            <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+              3. Encuentra el <strong>VERBO</strong>: "Los estudiantes escriben sus tareas rápidamente."
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="estudiantes"> <span>estudiantes</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="escriben"> <span>escriben</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="tareas"> <span>tareas</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q3" value="rápidamente"> <span>rápidamente</span></label></div>
+            </div>
+            <div class="feedback-msg mt-2" id="feedback-q3"></div>
+          </div>
 
-      <!-- Pregunta 4 -->
-      <div class="card p-4 mb-4 border rounded-3 bg-white" id="q4-card">
-        <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
-          4. Identifica el <strong>ADVERBIO</strong>: "María corre muy rápido en las mañanas."
-        </p>
-        <div class="row g-3">
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="María"> <span>María</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="corre"> <span>corre</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="rápido"> <span>rápido</span></label></div>
-          <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="mañanas"> <span>mañanas</span></label></div>
-        </div>
-        <div class="feedback-msg mt-2" id="feedback-q4"></div>
-      </div>
+          <!-- Pregunta 4 -->
+          <div class="card p-4 mb-4 border rounded-3 bg-white" id="q4-card">
+            <p class="fw-medium mb-3" style="color: #1e293b; font-size: 15px;">
+              4. Identifica el <strong>ADVERBIO</strong>: "María corre muy rápido en las mañanas."
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="María"> <span>María</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="corre"> <span>corre</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="rápido"> <span>rápido</span></label></div>
+              <div class="col-md-6"><label class="opcion-card"><input type="radio" name="q4" value="mañanas"> <span>mañanas</span></label></div>
+            </div>
+            <div class="feedback-msg mt-2" id="feedback-q4"></div>
+          </div>
 
-      <!-- Botón Verificar Respuestas -->
-      <button type="button" class="btn btn-verificar w-100 py-3 fw-bold rounded-3" onclick="verificarRespuestasU2()">
-        Verificar Respuestas
-      </button>
+          <button type="button" class="btn btn-verificar w-100 py-3 fw-bold rounded-3" onclick="verificarRespuestasU2()">
+            Verificar Respuestas
+          </button>
+        </form>
 
-    </form>
-
-    <div id="resultado-actividades" class="mt-3 p-3 rounded-3 text-center fw-bold d-none"></div>
-
-  </div>
-</div>
-
-  <!-- SECCIÓN 4: PRÁCTICA INTERACTIVA -->
-<div id="sec-practica" class="tab-content d-none">
-  <div class="card p-4 shadow-sm border-0 rounded-4">
-    
-    <h3 class="fw-bold mb-1" style="color: #0f172a; font-size: 20px;">Práctica Interactiva: Clasificación de Palabras</h3>
-    <p class="text-secondary mb-3 small">Arrastra cada palabra a su categoría correspondiente</p>
-
-    <!-- REFERENCIA VISUAL CON TILDE VERDE Y CRUZ ROJA -->
-    <div class="d-flex align-items-center gap-3 mb-3 p-2 rounded-3 bg-light border">
-      <small class="fw-semibold text-secondary">Referencia:</small>
-      <span class="badge-ref ref-correcto">
-        <i class="fw-bold text-success">✓</i> Correcto
-      </span>
-      <span class="badge-ref ref-incorrecto">
-        <i class="fw-bold text-danger">✗</i> Incorrecto
-      </span>
-    </div>
-
-    <!-- Caja de Palabras Disponibles -->
-    <div class="p-3 mb-4 rounded-3" style="background-color: #f8fafc; border: 1px dashed #cbd5e1;">
-      <small class="fw-semibold text-secondary d-block mb-3">Palabras disponibles:</small>
-      <div class="d-flex flex-wrap gap-2 align-items-center" id="palabras-disponibles" ondragover="permitirSoltar(event)" ondrop="soltar(event)">
-        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-montana" data-categoria="Sustantivo">montaña</span>
-        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-brillante" data-categoria="Adjetivo">brillante</span>
-        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-correr" data-categoria="Verbo">correr</span>
-        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-lentamente" data-categoria="Adverbio">lentamente</span>
-        <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-ella" data-categoria="Pronombre">ella</span>
+        <div id="resultado-actividades" class="mt-3 p-3 rounded-3 text-center fw-bold d-none"></div>
       </div>
     </div>
 
-    <!-- Contenedor de Cajas Destino -->
-    <div class="row g-3 mb-4">
-      
-      <!-- Sustantivo -->
-      <div class="col-md-4">
-        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Sustantivo">
-          <strong class="d-block mb-2 text-dark small">Sustantivo</strong>
-          <div class="drop-zone d-flex flex-wrap gap-2"></div>
+    <!-- SECCIÓN 4: PRÁCTICA INTERACTIVA -->
+    <div id="sec-practica" class="tab-content d-none">
+      <div class="card p-4 shadow-sm border-0 rounded-4">
+        <h3 class="fw-bold mb-1" style="color: #0f172a; font-size: 20px;">Práctica Interactiva: Clasificación de Palabras</h3>
+        <p class="text-secondary mb-3 small">Arrastra cada palabra a su categoría correspondiente</p>
+
+        <!-- Referencia Visual -->
+        <div class="d-flex align-items-center gap-3 mb-3 p-2 rounded-3 bg-light border">
+          <small class="fw-semibold text-secondary">Referencia:</small>
+          <span class="badge-ref ref-correcto">
+            <i class="fw-bold text-success">✓</i> Correcto
+          </span>
+          <span class="badge-ref ref-incorrecto">
+            <i class="fw-bold text-danger">✗</i> Incorrecto
+          </span>
+        </div>
+
+        <!-- Caja de Palabras Disponibles -->
+        <div class="p-3 mb-4 rounded-3" style="background-color: #f8fafc; border: 1px dashed #cbd5e1;">
+          <small class="fw-semibold text-secondary d-block mb-3">Palabras disponibles:</small>
+          <div class="d-flex flex-wrap gap-2 align-items-center" id="palabras-disponibles" ondragover="permitirSoltar(event)" ondrop="soltar(event)">
+            <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-montana" data-categoria="Sustantivo">montaña</span>
+            <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-brillante" data-categoria="Adjetivo">brillante</span>
+            <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-correr" data-categoria="Verbo">correr</span>
+            <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-lentamente" data-categoria="Adverbio">lentamente</span>
+            <span class="palabra-chip" draggable="true" ondragstart="arrastrar(event)" id="p-ella" data-categoria="Pronombre">ella</span>
+          </div>
+        </div>
+
+        <!-- Cajas Destino -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Sustantivo">
+              <strong class="d-block mb-2 text-dark small">Sustantivo</strong>
+              <div class="drop-zone d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adjetivo">
+              <strong class="d-block mb-2 text-dark small">Adjetivo</strong>
+              <div class="drop-zone d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Verbo">
+              <strong class="d-block mb-2 text-dark small">Verbo</strong>
+              <div class="drop-zone d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adverbio">
+              <strong class="d-block mb-2 text-dark small">Adverbio</strong>
+              <div class="drop-zone d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Pronombre">
+              <strong class="d-block mb-2 text-dark small">Pronombre</strong>
+              <div class="drop-zone d-flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" class="btn btn-dark btn-reiniciar px-4 py-2 fw-semibold rounded-3" onclick="reiniciarActividadInteractiva()">
+            Reiniciar Actividad
+          </button>
         </div>
       </div>
-
-      <!-- Adjetivo -->
-      <div class="col-md-4">
-        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adjetivo">
-          <strong class="d-block mb-2 text-dark small">Adjetivo</strong>
-          <div class="drop-zone d-flex flex-wrap gap-2"></div>
-        </div>
-      </div>
-
-      <!-- Verbo -->
-      <div class="col-md-4">
-        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Verbo">
-          <strong class="d-block mb-2 text-dark small">Verbo</strong>
-          <div class="drop-zone d-flex flex-wrap gap-2"></div>
-        </div>
-      </div>
-
-      <!-- Adverbio -->
-      <div class="col-md-4 mt-3">
-        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Adverbio">
-          <strong class="d-block mb-2 text-dark small">Adverbio</strong>
-          <div class="drop-zone d-flex flex-wrap gap-2"></div>
-        </div>
-      </div>
-
-      <!-- Pronombre -->
-      <div class="col-md-4 mt-3">
-        <div class="caja-drop p-3 rounded-3" ondragover="permitirSoltar(event)" ondrop="soltar(event)" data-categoria="Pronombre">
-          <strong class="d-block mb-2 text-dark small">Pronombre</strong>
-          <div class="drop-zone d-flex flex-wrap gap-2"></div>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Botón Reiniciar -->
-    <div>
-      <button type="button" class="btn btn-dark btn-reiniciar px-4 py-2 fw-semibold rounded-3" onclick="reiniciarActividadInteractiva()">
-        Reiniciar Actividad
-      </button>
-    </div>
-
-  </div>
-</div>
 
   </div> <!-- Cierre main-card -->
 
-  <!-- SCRIPT CON TODA LA LÓGICA DE DATO Y NAVEGACIÓN -->
+  <!-- VENTANA MODAL UNIFICADA (REGISTRO Y LOGIN) -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold text-dark" id="modalTitulo">Autenticación</h5>
+          <button type="button" class="btn-close" id="btn-close-modal" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body p-4">
+          
+          <div id="step-role-selection">
+            <p class="text-secondary text-center mb-4">¿Cómo querés registrarte?</p>
+            <div class="d-grid gap-3">
+              <button class="btn btn-outline-primary btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Estudiante')">👨‍🎓 Soy Estudiante</button>
+              <button class="btn btn-outline-success btn-lg fw-semibold" onclick="mostrarFormularioRegistro('Docente')">👩‍🏫 Soy Docente</button>
+            </div>
+          </div>
+
+          <form id="form-registro" class="d-none" onsubmit="guardarRegistro(event)">
+            <div class="alert alert-info text-center py-2" id="badge-rol">Rol seleccionado: Estudiante</div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Foto de Perfil</label>
+              <input type="file" id="reg-foto" class="form-control" accept="image/*">
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Nombre Completo</label>
+              <input type="text" id="reg-nombre" class="form-control" placeholder="Ej: Juan Pérez" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Correo Electrónico</label>
+              <input type="email" id="reg-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Contraseña</label>
+              <input type="password" id="reg-password" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <button type="submit" class="btn btn-success fw-semibold">Completar Registro</button>
+              <button type="button" class="btn btn-link text-secondary text-decoration-none" onclick="abrirAuthModal('registro')">← Volver a elegir rol</button>
+            </div>
+          </form>
+
+          <form id="form-login" class="d-none" onsubmit="procesarLogin(event)">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Correo Electrónico</label>
+              <input type="email" id="login-email" class="form-control" placeholder="nombre@ejemplo.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Contraseña</label>
+              <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <button type="submit" class="btn btn-info text-white fw-semibold">Iniciar Sesión</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="main-footer text-center py-3 bg-light border-top mt-5">
+    Plataforma Educativa de Lengua - Botta Micaela Florencia
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // 1. Datos para las Clases de Palabras
-    const temasClasesPalabras = {
+    // --- LÓGICA DE PESTAÑAS Y TEMAS ---
+    function cambiarPestana(idSeccion, boton) {
+      document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('d-none'));
+      document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(`sec-${idSeccion}`).classList.remove('d-none');
+      boton.classList.add('active');
+    }
+
+    const temasInfo = {
       sustantivos: {
-        titulo: "Sustantivos",
-        descripcion: "Palabras que nombran personas, animales, cosas, lugares o ideas.",
-        clasificaciones: [
-          { tipo: "Propios", desc: "Nombran en particular (Juan, México, Amazon)" },
-          { tipo: "Comunes", desc: "Nombran en general (niño, país, empresa)" },
-          { tipo: "Concretos", desc: "Se pueden percibir por los sentidos (mesa, perro)" },
-          { tipo: "Abstractos", desc: "No se pueden percibir por los sentidos (amor, felicidad)" },
-          { tipo: "Individuales", desc: "Nombran a un solo ser (árbol, oveja)" },
-          { tipo: "Colectivos", desc: "Nombran a un conjunto (bosque, rebaño)" }
-        ],
-        ejemplos: "niño, María, perro, felicidad, París, libro"
+        titulo: "Los Sustantivos",
+        descripcion: "Son palabras variables que nombran seres, objetos, lugares o ideas.",
+        tipos: ["Propios (María, España)", "Comunes (perro, mesa)", "Concretos (libro)", "Abstractos (libertad)"]
       },
       adjetivos: {
-        titulo: "Adjetivos",
-        descripcion: "Palabras que califican o determinan al sustantivo, indicando cualidades o características.",
-        clasificaciones: [
-          { tipo: "Calificativos", desc: "Expresan cualidades o estados (alto, grande, bonito)" },
-          { tipo: "Demostrativos", desc: "Indican la distancia espacial/temporal (este, ese, aquel)" },
-          { tipo: "Posesivos", desc: "Denotan pertenencia o posesión (mi, tu, su, nuestro)" },
-          { tipo: "Numerales", desc: "Indican cantidad u orden preciso (dos, primer, doble)" }
-        ],
-        ejemplos: "bonito, grande, este, mi, primer, algunos"
+        titulo: "Los Adjetivos",
+        descripcion: "Acompañan al sustantivo para expresar una cualidad o determinarlo.",
+        tipos: ["Calificativos (lindo, grande)", "Demostrativos (este, aquel)", "Posesivos (mi, tu)"]
       },
       verbos: {
-        titulo: "Verbos",
-        descripcion: "Palabras que expresan acciones, estados o procesos.",
-        clasificaciones: [
-          { tipo: "Acción", desc: "Describen actividades físicas o mentales (correr, pensar)" },
-          { tipo: "Estado", desc: "Expresan situaciones o condiciones (ser, estar, parecer)" },
-          { tipo: "Proceso", desc: "Indican transformaciones o cambios (crecer, envejecer)" }
-        ],
-        ejemplos: "correr, pensar, es, tiene, saltar, estudiar"
+        titulo: "Los Verbos",
+        descripcion: "Expresan acciones, procesos o estados en un tiempo determinado.",
+        tipos: ["Pasado (comí)", "Presente (como)", "Futuro (comeré)"]
       },
       adverbios: {
-        titulo: "Adverbios",
-        descripcion: "Palabras que modifican al verbo, adjetivo u otro adverbio.",
-        clasificaciones: [
-          { tipo: "Lugar", desc: "Indican ubicación (aquí, allí, lejos, cerca)" },
-          { tipo: "Tiempo", desc: "Muestran cuándo ocurre la acción (hoy, mañana, tarde)" },
-          { tipo: "Modo", desc: "Manera en que ocurre la acción (rápidamente, bien, mal)" },
-          { tipo: "Cantidad", desc: "Indican grado o escala (mucho, poco, muy)" }
-        ],
-        ejemplos: "rápidamente, aquí, hoy, mucho, sí, no"
+        titulo: "Los Adverbios",
+        descripcion: "Palabras invariables que modifican al verbo, al adjetivo o a otro adverbio.",
+        tipos: ["Lugar (aquí)", "Tiempo (hoy)", "Modo (bien, rápidamente)", "Cantidad (mucho)"]
       },
       pronombres: {
-        titulo: "Pronombres",
-        descripcion: "Palabras que sustituyen al nombre para evitar repeticiones.",
-        clasificaciones: [
-          { tipo: "Personales", desc: "Sustituyen a las personas gramaticales (yo, tú, él, nosotros)" },
-          { tipo: "Demostrativos", desc: "Señalan seres según la distancia (este, ese, aquel)" },
-          { tipo: "Posesivos", desc: "Indican posesión (mío, tuyo, suyo)" }
-        ],
-        ejemplos: "yo, tú, él, este, mío, alguien, que"
+        titulo: "Los Pronombres",
+        descripcion: "Sustituyen al sustantivo en la oración para evitar su repetición.",
+        tipos: ["Personales (yo, tú, él)", "Posesivos (mío, tuyo)", "Demostrativos (éste, aquél)"]
       }
     };
 
-    // 2. Función para cambiar entre pestañas principales
-    function cambiarPestana(pestanaNombre, boton) {
-      // Ocultar todas las pestañas
-      document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('d-none'));
+    function cargarTema(temaKey, btn) {
+      if (btn) {
+        document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
       
-      // Desmarcar botones superiores
-      document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
-
-      // Mostrar la pestaña seleccionada
-      const seccion = document.getElementById('sec-' + pestanaNombre);
-      if (seccion) {
-        seccion.classList.remove('d-none');
-      }
-
-      // Activar botón superior presionado
-      if (boton) {
-        boton.classList.add('active');
-      }
-
-      // Si se abre 'contenido', renderizar Sustantivos por defecto
-      if (pestanaNombre === 'contenido') {
-        cargarTema('sustantivos');
-      }
-    }
-
-    // 3. Función para dibujar los detalles según el botón seleccionado
-    function cargarTema(temaKey) {
-      // Activar visualmente el botón seleccionado
-      document.querySelectorAll('.topic-btn').forEach(btn => {
-        if (btn.getAttribute('data-topic') === temaKey) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      const data = temasClasesPalabras[temaKey];
-      if (!data) return;
-
-      // Crear las cajas de clasificaciones
-      let itemsHTML = '';
-      data.clasificaciones.forEach(item => {
-        itemsHTML += `
-          <div class="col-md-6 mb-3">
-            <div class="p-3 rounded-3 bg-light d-flex align-items-center gap-2">
-              <span class="text-success fs-5 fw-bold">☑</span>
-              <span class="small"><strong>${item.tipo}:</strong> ${item.desc}</span>
-            </div>
-          </div>
-        `;
-      });
-
-      // Insertar el contenido en el contenedor
+      const info = temasInfo[temaKey];
       const contenedor = document.getElementById('contenedor-detalle-tema');
-      contenedor.innerHTML = `
-        <h3 class="fw-bold mb-1">${data.titulo}</h3>
-        <p class="text-muted mb-4">${data.descripcion}</p>
-
-        <h6 class="fw-bold mb-3">Tipos y clasificaciones:</h6>
-        <div class="row g-3 mb-2">
-          ${itemsHTML}
-        </div>
-
-        <h6 class="fw-bold mb-2">Ejemplos:</h6>
-        <div class="p-3 rounded-3" style="background-color: #eff6ff; border-left: 4px solid #2563eb;">
-          <p class="mb-0 text-dark font-monospace">${data.ejemplos}</p>
-        </div>
+      
+      let html = `
+        <h3 class="fw-bold text-primary">${info.titulo}</h3>
+        <p class="text-secondary fs-5">${info.descripcion}</p>
+        <h5 class="fw-bold mt-4">Clasificación común:</h5>
+        <ul>
       `;
+      info.tipos.forEach(tipo => {
+        html += `<li>${tipo}</li>`;
+      });
+      html += `</ul>`;
+      
+      contenedor.innerHTML = html;
     }
 
-    // Cargar automáticamente Sustantivos al entrar a la página
+    // Inicializar el primer tema de la sección de contenidos
     document.addEventListener('DOMContentLoaded', () => {
       cargarTema('sustantivos');
     });
-  </script>
 
-  <!--respuestas correctas de la seccion actividades de unidad 2-->
-  <script>
+    // --- LÓGICA DE ACTIVIDADES (RESPUESTAS) ---
     function verificarRespuestasU2() {
-  // Respuestas correctas
-  const respuestasCorrectas = {
-    q1: "gato",
-    q2: "pequeña",
-    q3: "escriben",
-    q4: "rápido"
-  };
+      const respuestasCorrectas = { q1: 'gato', q2: 'pequeña', q3: 'escriben', q4: 'rápido' };
+      let puntos = 0;
 
-  let puntaje = 0;
-  const total = 4;
-
-  for (let key in respuestasCorrectas) {
-    // 1. Buscamos la opción seleccionada correctamente en el DOM
-    const opcionSeleccionada = document.querySelector(`input[name="${key}"]:checked`);
-    const card = document.getElementById(`${key}-card`);
-    const feedback = document.getElementById(`feedback-${key}`);
-
-    // Limpiamos estilos previos si existieran
-    if (card) card.classList.remove('card-correcta', 'card-incorrecta');
-    if (feedback) {
-      feedback.innerText = '';
-      feedback.className = 'feedback-msg mt-2';
-    }
-
-    // 2. Si no seleccionó nada
-    if (!opcionSeleccionada) {
-      if (card) card.classList.add('card-incorrecta');
-      if (feedback) {
-        feedback.innerText = '⚠️ Por favor, selecciona una opción.';
-        feedback.classList.add('msg-incorrecto');
+      for (let q in respuestasCorrectas) {
+        const seleccion = document.querySelector(`input[name="${q}"]:checked`);
+        const feedback = document.getElementById(`feedback-${q}`);
+        
+        if (seleccion) {
+          if (seleccion.value === respuestasCorrectas[q]) {
+            puntos++;
+            feedback.innerHTML = '<span class="text-success fw-bold">✓ ¡Correcto!</span>';
+          } else {
+            feedback.innerHTML = '<span class="text-danger fw-bold">✗ Incorrecto</span>';
+          }
+        } else {
+          feedback.innerHTML = '<span class="text-warning fw-bold">Sin responder</span>';
+        }
       }
-      continue;
+
+      const resContenedor = document.getElementById('resultado-actividades');
+      resContenedor.classList.remove('d-none');
+      resContenedor.className = `mt-3 p-3 rounded-3 text-center fw-bold ${puntos === 4 ? 'bg-success text-white' : 'bg-warning text-dark'}`;
+      resContenedor.innerText = `Obtuviste ${puntos} de 4 respuestas correctas.`;
     }
 
-    // 3. Comparamos la respuesta
-    const valorRespuesta = opcionSeleccionada.value;
+    // --- LÓGICA DE ARRASTRAR Y SOLTAR (DRAG & DROP) ---
+    function permitirSoltar(ev) {
+      ev.preventDefault();
+    }
 
-    if (valorRespuesta === respuestasCorrectas[key]) {
-      puntaje++;
-      if (card) card.classList.add('card-correcta');
-      if (feedback) {
-        feedback.innerText = '¡Correcto! 🎉';
-        feedback.classList.add('msg-correcto');
+    function arrastrar(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function soltar(ev) {
+      ev.preventDefault();
+      const idPalabra = ev.dataTransfer.getData("text");
+      const elemPalabra = document.getElementById(idPalabra);
+      let contenedorDestino = ev.target;
+
+      // Buscar la caja contenedor válida
+      while (contenedorDestino && !contenedorDestino.classList.contains('caja-drop') && contenedorDestino.id !== 'palabras-disponibles') {
+        contenedorDestino = contenedorDestino.parentElement;
       }
-    } else {
-      if (card) card.classList.add('card-incorrecta');
-      if (feedback) {
-        feedback.innerText = `Incorrecto. La respuesta correcta es "${respuestasCorrectas[key]}".`;
-        feedback.classList.add('msg-incorrecto');
+
+      if (contenedorDestino) {
+        if (contenedorDestino.classList.contains('caja-drop')) {
+          const zonaDrop = contenedorDestino.querySelector('.drop-zone');
+          zonaDrop.appendChild(elemPalabra);
+
+          // Verificar si la respuesta es correcta
+          const catCorrecta = elemPalabra.getAttribute('data-categoria');
+          const catCaja = contenedorDestino.getAttribute('data-categoria');
+
+          if (catCorrecta === catCaja) {
+            elemPalabra.className = "palabra-chip correcto";
+          } else {
+            elemPalabra.className = "palabra-chip incorrecto";
+          }
+        } else if (contenedorDestino.id === 'palabras-disponibles') {
+          contenedorDestino.appendChild(elemPalabra);
+          elemPalabra.className = "palabra-chip";
+        }
       }
     }
-  }
 
-  // 4. Mostrar cartel resumen al final
-  const resumen = document.getElementById('resultado-actividades');
-  if (resumen) {
-    resumen.classList.remove('d-none', 'alert-success', 'alert-danger', 'alert-warning');
-    
-    if (puntaje === total) {
-      resumen.classList.add('alert', 'alert-success');
-      resumen.innerText = `¡Excelente! Respondiste correctamente ${puntaje} de ${total} preguntas.`;
-    } else {
-      resumen.classList.add('alert', 'alert-warning');
-      resumen.innerText = `Obtuviste ${puntaje} de ${total} respuestas correctas. ¡Revisa los marcados en rojo e inténtalo de nuevo!`;
-    }
-  }
-}
-  </script>
-  <!--practica interactiva-->
-  <script>
-    // Funciones para la API Nativa Drag and Drop
-function arrastrar(ev) {
-  ev.dataTransfer.setData("text/plain", ev.target.id);
-}
-
-function permitirSoltar(ev) {
-  ev.preventDefault();
-  // Añadir visualmente un resalte a la caja
-  const caja = ev.target.closest('.caja-drop');
-  if (caja) caja.classList.add('drag-hover');
-}
-
-function soltar(ev) {
-  ev.preventDefault();
-  
-  // Quitar resalte de la caja
-  document.querySelectorAll('.caja-drop').forEach(c => c.classList.remove('drag-hover'));
-
-  const idPalabra = ev.dataTransfer.getData("text/plain");
-  const elementoPalabra = document.getElementById(idPalabra);
-  
-  if (!elementoPalabra) return;
-
-  // Detectar si se soltó sobre una caja de categoría o sobre el contenedor original
-  const cajaDrop = ev.target.closest('.caja-drop');
-  const contenedorDisponibles = ev.target.closest('#palabras-disponibles');
-
-  if (cajaDrop) {
-    const dropZone = cajaDrop.querySelector('.drop-zone') || cajaDrop;
-    dropZone.appendChild(elementoPalabra);
-
-    // Validar si la categoría de la caja coincide con la palabra
-    const catCaja = cajaDrop.getAttribute('data-categoria');
-    const catPalabra = elementoPalabra.getAttribute('data-categoria');
-
-    if (catCaja === catPalabra) {
-      elementoPalabra.classList.remove('chip-incorrecto');
-      elementoPalabra.classList.add('chip-correcto');
-    } else {
-      elementoPalabra.classList.remove('chip-correcto');
-      elementoPalabra.classList.add('chip-incorrecto');
-    }
-
-  } else if (contenedorDisponibles) {
-    // Si se devuelve a la caja original
-    contenedorDisponibles.appendChild(elementoPalabra);
-    elementoPalabra.classList.remove('chip-correcto', 'chip-incorrecto');
-  }
-}
-
-// Función para el botón "Reiniciar Actividad"
-function reiniciarActividadInteractiva() {
-  const contenedorOrigen = document.getElementById('palabras-disponibles');
-  const palabras = document.querySelectorAll('.palabra-chip');
-
-  palabras.forEach(palabra => {
-    palabra.classList.remove('chip-correcto', 'chip-incorrecto');
-    contenedorOrigen.appendChild(palabra);
-  });
-
-  document.querySelectorAll('.caja-drop').forEach(c => c.classList.remove('drag-hover'));
-}
-  </script>
-
-  <!--abrir y cerrar el menu-->
-<script>
-  
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-
-    // Abre/cierra el menú al tocar el botón ☰
-    hamburgerBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
-
-    // Cierra el menú al hacer clic en cualquier opción
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+    function reiniciarActividadInteractiva() {
+      const contenedorOriginal = document.getElementById('palabras-disponibles');
+      document.querySelectorAll('.palabra-chip').forEach(chip => {
+        chip.className = "palabra-chip";
+        contenedorOriginal.appendChild(chip);
       });
+    }
+
+    // --- LÓGICA DE AUTENTICACIÓN Y SESIÓN ---
+    let rolSeleccionado = '';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const usuarioActivo = JSON.parse(localStorage.getItem('sesion_activa'));
+      if (usuarioActivo) {
+        renderizarPerfilNavbar(usuarioActivo);
+      }
     });
+
+    function abrirAuthModal(modo) {
+      const titulo = document.getElementById('modalTitulo');
+      const stepRole = document.getElementById('step-role-selection');
+      const formRegistro = document.getElementById('form-registro');
+      const formLogin = document.getElementById('form-login');
+
+      if (modo === 'registro') {
+        titulo.innerText = "Crear Cuenta Nueva";
+        stepRole.classList.remove('d-none');
+        formRegistro.classList.add('d-none');
+        formLogin.classList.add('d-none');
+      } else {
+        titulo.innerText = "Iniciar Sesión";
+        stepRole.classList.add('d-none');
+        formRegistro.classList.add('d-none');
+        formLogin.classList.remove('d-none');
+      }
+    }
+
+    function mostrarFormularioRegistro(rol) {
+      rolSeleccionado = rol;
+      document.getElementById('modalTitulo').innerText = `Registro de ${rol}`;
+      document.getElementById('badge-rol').innerText = `Perfil seleccionado: ${rol}`;
+      document.getElementById('step-role-selection').classList.add('d-none');
+      document.getElementById('form-registro').classList.remove('d-none');
+    }
+
+    function guardarRegistro(event) {
+      event.preventDefault();
+      const fileInput = document.getElementById('reg-foto');
+      const file = fileInput.files[0];
+      let fotoBase64 = "https://ui-avatars.com/api/?name=" + encodeURIComponent(document.getElementById('reg-nombre').value);
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          completarGuardado(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        completarGuardado(fotoBase64);
+      }
+    }
+
+    function completarGuardado(fotoUrl) {
+      const usuario = {
+        nombre: document.getElementById('reg-nombre').value,
+        email: document.getElementById('reg-email').value,
+        password: document.getElementById('reg-password').value,
+        rol: rolSeleccionado,
+        foto: fotoUrl
+      };
+
+      localStorage.setItem(usuario.email, JSON.stringify(usuario));
+      alert(`¡Cuenta de ${usuario.rol} creada con éxito!`);
+      document.getElementById('form-registro').reset();
+      abrirAuthModal('login');
+    }
+
+    function procesarLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const usuarioGuardado = localStorage.getItem(email);
+
+      if (!usuarioGuardado) {
+        alert("El correo ingresado no está registrado.");
+        return;
+      }
+
+      const usuario = JSON.parse(usuarioGuardado);
+
+      if (usuario.password === password) {
+        localStorage.setItem('sesion_activa', JSON.stringify(usuario));
+        renderizarPerfilNavbar(usuario);
+        document.getElementById('form-login').reset();
+
+        const modalElement = document.getElementById('authModal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) modalInstance.hide();
+      } else {
+        alert("Contraseña incorrecta.");
+      }
+    }
+
+    function renderizarPerfilNavbar(usuario) {
+      document.getElementById('auth-buttons').classList.add('d-none');
+      const profileMenu = document.getElementById('user-profile-menu');
+      profileMenu.classList.remove('d-none');
+      profileMenu.classList.add('d-flex');
+
+      document.getElementById('nav-user-photo').src = usuario.foto;
+      document.getElementById('nav-user-name').innerText = usuario.nombre;
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem('sesion_activa');
+      document.getElementById('user-profile-menu').classList.add('d-none');
+      document.getElementById('user-profile-menu').classList.remove('d-flex');
+      document.getElementById('auth-buttons').classList.remove('d-none');
+    }
   </script>
 </body>
 </html>
-
-
-

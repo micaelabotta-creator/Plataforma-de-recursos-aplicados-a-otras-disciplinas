@@ -9,25 +9,47 @@
 </head>
 <body>
  <!--MENU DE NAVEGACIÓN-->
-    <nav class="navbar">
-    <!--CONTENEDOR DEL MENU DE NAVEGACIÓN-->
-  <div class="nav-container">
-    <div class="logo">
-      <span class="logo-icon">📖</span> 
-      <strong>AprendoLiteratura</strong>
+    <!--MENU DE NAVEGACIÓN-->
+<nav class="navbar navbar-expand-lg bg-white py-3 shadow-sm">
+  <div class="container-fluid px-4">
+    <!-- LOGO O DERECHA SEGÚN CORRESPONDA -->
+    <a class="navbar-brand font-weight-bold text-primary d-flex align-items-center" href="index.html">
+      <span class="mr-2" style="font-size: 1.5rem;">📖</span>
+      <span style="color: #17a2b8;">AprendoLiteratura</span>
+    </a>
+
+    <!-- BOTÓN HAMBURGUESA PARA CELULARES -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- MENÚ ALINEADO A LA DERECHA -->
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ml-auto align-items-center">
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="index.html">INICIO</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="index.html#seccion-contenidos">CONTENIDOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-weight-bold text-info px-3" href="tutorial.html">💡 AYUDA</a>
+        </li>
+        <li class="nav-item ml-lg-2">
+          <button class="btn btn-warning text-white rounded-pill font-weight-bold px-4 py-2" data-toggle="modal" data-target="#authModal">
+            🔑 REGÍSTRATE
+          </button>
+        </li>
+        <li class="nav-item ml-lg-2 mt-2 mt-lg-0">
+          <button class="btn text-white rounded-pill font-weight-bold px-4 py-2" style="background-color: #17a2b8;" data-toggle="modal" data-target="#authModal">
+            👨‍🎓 INICIAR SESIÓN
+          </button>
+        </li>
+      </ul>
     </div>
-    <div class="nav-links">
-      <a href="#" class="btn-nav btn-blue">Inicio</a>
-      <a href="#" class="btn-nav btn-green">🎮 Quiz</a>
-      <a href="tutorial.html" class="btn-nav btn-purple">💡 Tutorial</a>
-    </div>
-  </div>
-  <!--CIERRE DEL CONTENEDOR-->
-  <div class="nav-subbar">
-    <span>Progreso General: 0%</span>
-    <span>🎓 Puntos: 0</span>
   </div>
 </nav>
+<!--CIERRE DE MENU DE NAVEGACIÓN-->
 <!--CIERRE DE MENU DE NAVEGACIÓN-->
 
 <!--NUEVA PARTE DE PAGINA WEB-->
